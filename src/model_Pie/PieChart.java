@@ -128,7 +128,7 @@ public class PieChart extends JFrame {
 				chart = createChart(createDataset());
 				
 				ChartPanel pan = new ChartPanel(chart) ;
-				pan.setBounds(10, 11, 551, 450);
+				pan.setBounds(10, 11, 515, 450);
 				
 				panel_1.add(pan) ;
 				panel_1.repaint();
@@ -141,7 +141,7 @@ public class PieChart extends JFrame {
 					chart = createChartD(createDataset()) ;
 					
 					ChartPanel pan = new ChartPanel(chart) ;
-					pan.setBounds(10, 11, 551, 450);
+					pan.setBounds(10, 11, 515, 450);
 					
 					panel_2.add(pan) ;
 					panel_2.repaint();
