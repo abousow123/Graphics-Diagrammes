@@ -46,11 +46,11 @@ public class MultiplePieChartDemo1 extends ApplicationFrame {
      */
     private CategoryDataset createDataset() {
         final double[][] data = new double[][] {
-            {3.0, 4.0, 3.0, 5.0},
-            {5.0, 7.0, 6.0, 8.0},
-            {5.0, 7.0, 3.0, 8.0},
-            {1.0, 2.0, 3.0, 4.0},
-            {2.0, 3.0, 2.0, 3.0}
+            {3.0, 4.0, 3.0},
+            {5.0, 7.0, 6.0},
+//            {5.0, 7.0, 3.0, 8.0},
+//            {1.0, 2.0, 3.0, 4.0},
+//            {2.0, 3.0, 2.0, 3.0}
         };
         final CategoryDataset dataset = DatasetUtilities.createCategoryDataset(
             "pays ",

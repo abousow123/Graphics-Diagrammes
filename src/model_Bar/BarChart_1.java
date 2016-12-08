@@ -251,9 +251,7 @@ public class BarChart_1 extends JFrame {
 		tabValeur.add(new Double(textField_12.getText()));
 		tabValeur.add(new Double(textField_14.getText()));
 		tabValeur.add(new Double(textField_16.getText()));
-		tabValeur.add(14.8);
-		tabValeur.add(19.7);
-		tabValeur.add(15.0);
+		
 		a = tabValeur;
 		return a;
 
@@ -268,9 +266,7 @@ public class BarChart_1 extends JFrame {
 		nom.add(textField_11.getText());
 		nom.add(textField_13.getText());
 		nom.add(textField_15.getText());
-		nom.add("a");
-		nom.add("b");
-		nom.add("c");
+		
 		b = nom;
 		return b;
 	}
@@ -288,10 +284,7 @@ public class BarChart_1 extends JFrame {
 			dataset.setValue(a.get(i), b.get(i), textField_10.getText());
 		}
 
-		for (int i = 6; i < 9; i++) {
-			dataset.setValue(a.get(i), b.get(i), "d");
-		}
-
+		
 		return dataset;
 	}
 

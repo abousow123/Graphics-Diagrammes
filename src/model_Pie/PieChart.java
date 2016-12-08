@@ -36,6 +36,7 @@ public class PieChart extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	
 	private JTextField textField_4;
 	
 	JRadioButton rdbtnPiechart ;
@@ -138,7 +139,7 @@ public class PieChart extends JFrame {
 					layeredPane.setLayer(panel_2, 0,0);
 					panel_1.setVisible(false);
 					
-					chart = createChartD(createDataset()) ;
+					chart = createChart3D(createDataset()) ;
 					
 					ChartPanel pan = new ChartPanel(chart) ;
 					pan.setBounds(10, 11, 515, 450);
@@ -289,7 +290,7 @@ public class PieChart extends JFrame {
 	}
 	
 	
-	private JFreeChart createChartD(PieDataset dataset) {
+	private JFreeChart createChart3D(PieDataset dataset) {
 		
         
 		JFreeChart chart = ChartFactory.createPieChart3D(textField.getText(), // chart
@@ -313,14 +314,5 @@ public class PieChart extends JFrame {
 	}
 	
 
-	public JPanel createDemoPanel() {
-		JFreeChart chart = null ;
-		if(rdbtnPiechart.isSelected()){
-		chart = createChart(createDataset());
-		}
-		if(rdbtndpiechart.isSelected()){
-			chart = createChartD(createDataset()) ;
-		}
-		return new ChartPanel(chart);
-	}
+	
 }
