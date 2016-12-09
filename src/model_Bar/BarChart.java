@@ -61,7 +61,7 @@ public class BarChart extends JFrame {
 	JRadioButton rSimplBarRadioButton;
 	JRadioButton DBarRadioButton;
 	JRadioButton rWaterfallRadioButton;
-	JRadioButton rdbtnStackedbar ;
+	JRadioButton rdbtnStackedbar;
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
@@ -235,7 +235,7 @@ public class BarChart extends JFrame {
 		rWaterfallRadioButton = new JRadioButton("Waterfall Bar");
 		rWaterfallRadioButton.setBounds(219, 314, 109, 23);
 		panel.add(rWaterfallRadioButton);
-		
+
 		rdbtnStackedbar = new JRadioButton("StackedBar");
 		rdbtnStackedbar.setBounds(107, 353, 109, 23);
 		panel.add(rdbtnStackedbar);
@@ -245,8 +245,6 @@ public class BarChart extends JFrame {
 		group.add(DBarRadioButton);
 		group.add(rWaterfallRadioButton);
 		group.add(rdbtnStackedbar);
-		
-		
 
 		layeredPane = new JLayeredPane();
 		layeredPane.setForeground(java.awt.Color.GRAY);
@@ -266,7 +264,7 @@ public class BarChart extends JFrame {
 		panel_2 = new JPanel(null);
 		panel_2.setBounds(379, 11, 720, 487);
 		contentPane.add(panel_2);
-		
+
 		panel_5 = new JPanel(null);
 		panel_5.setBounds(379, 11, 720, 498);
 		contentPane.add(panel_5);
@@ -294,7 +292,10 @@ public class BarChart extends JFrame {
 				panel_4.setVisible(false);
 				panel_3.setVisible(false);
 				panel_5.setVisible(false);
-				chart = creteFreeChart(createSimpleBarChart());
+				chart = creteFreeChart(textField.getText(), textField_1.getText(),
+						textField_10.getText(),createBarDataset(textField_1.getText(),
+						 createTabNom(),
+						createTabValeur()));
 
 				ChartPanel frame = new ChartPanel(chart);
 				frame.setBounds(10, 29, 600, 450);
@@ -312,7 +313,10 @@ public class BarChart extends JFrame {
 				panel_4.setVisible(false);
 				panel_5.setVisible(false);
 
-				chart = creteFreeChart3D(createSimpleBarChart());
+				chart = creteFreeChart3D(textField.getText(), textField_1.getText(),
+						textField_10.getText(),createBarDataset(textField_1.getText(),
+								 createTabNom(),
+								createTabValeur()));
 
 				ChartPanel frame = new ChartPanel(chart);
 				frame.setBounds(10, 29, 600, 450);
@@ -327,7 +331,8 @@ public class BarChart extends JFrame {
 				panel_2.setVisible(false);
 				panel_3.setVisible(false);
 				panel_5.setVisible(false);
-				chart = creteFreeChartWaterfall(createSimpleBarChart());
+				chart = creteFreeChartWaterfall(createBarDataset(textField_1.getText(),
+						createTabNom(), createTabValeur()));
 
 				ChartPanel frame = new ChartPanel(chart);
 				frame.setBounds(10, 29, 600, 450);
@@ -335,14 +340,15 @@ public class BarChart extends JFrame {
 				panel_4.add(frame);
 				panel_4.repaint();
 			}
-			
+
 			if (rdbtnStackedbar.isSelected()) {
 				panel_5.setVisible(true);
 				layeredPane.setLayer(panel_5, 0, 0);
 				panel_4.setVisible(false);
 				panel_3.setVisible(false);
 				panel_2.setVisible(false);
-				chart = createStackedBarChart(createSimpleBarChart());
+				chart = createStackedBarChart(createBarDataset(textField_1.getText(),
+						createTabNom(), createTabValeur()));
 
 				ChartPanel frame = new ChartPanel(chart);
 				frame.setBounds(10, 29, 600, 450);
@@ -354,13 +360,12 @@ public class BarChart extends JFrame {
 		}
 	}
 
-	public DefaultCategoryDataset createSimpleBarChart() {
+	public DefaultCategoryDataset createBarDataset(String axeX,
+			ArrayList<String> nom, ArrayList<Double> valeur) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		ArrayList<Double> a = createTabValeur();
-		ArrayList<String> b = createTabNom();
-
-		for (int i = 0; i < 4; i++) {
-			dataset.setValue(a.get(i), textField_1.getText(), b.get(i));
+		
+		for (int i = 0; i < nom.size(); i++) {
+			dataset.setValue(valeur.get(i), axeX, nom.get(i));
 		}
 
 		return dataset;
@@ -389,11 +394,11 @@ public class BarChart extends JFrame {
 		return b;
 	}
 
-	public JFreeChart creteFreeChart(DefaultCategoryDataset dataset) {
+	public JFreeChart creteFreeChart(String titre, String axeX, String axeY,
+			DefaultCategoryDataset dataset) {
 		JFreeChart chart = null;
 
-		chart = ChartFactory.createBarChart(textField.getText(),
-				textField_1.getText(), textField_10.getText(), dataset,
+		chart = ChartFactory.createBarChart(titre, axeX, axeY, dataset,
 				PlotOrientation.VERTICAL, false, true, false);
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);
@@ -401,11 +406,11 @@ public class BarChart extends JFrame {
 		return chart;
 	}
 
-	public JFreeChart creteFreeChart3D(DefaultCategoryDataset dataset) {
+	public JFreeChart creteFreeChart3D(String titre, String axeX, String axeY,
+			DefaultCategoryDataset dataset) {
 		JFreeChart chart = null;
 
-		chart = ChartFactory.createBarChart3D(textField.getText(),
-				textField_1.getText(), textField_10.getText(), dataset,
+		chart = ChartFactory.createBarChart3D(titre, axeX, axeY, dataset,
 				PlotOrientation.VERTICAL, false, true, false);
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);

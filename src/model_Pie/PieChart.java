@@ -126,7 +126,7 @@ public class PieChart extends JFrame {
 					panel_1.setVisible(true);
 					layeredPane.setLayer(panel_1, 0,0);
 					panel_2.setVisible(false);
-				chart = createChart(createDataset());
+				chart = createPieChart(textField.getText(),createPieDataset(createTable(),createTabDouble()));
 				
 				ChartPanel pan = new ChartPanel(chart) ;
 				pan.setBounds(10, 11, 515, 450);
@@ -139,7 +139,7 @@ public class PieChart extends JFrame {
 					layeredPane.setLayer(panel_2, 0,0);
 					panel_1.setVisible(false);
 					
-					chart = createChart3D(createDataset()) ;
+					chart = createChart3D(textField.getText(),createPieDataset(createTable(),createTabDouble())) ;
 					
 					ChartPanel pan = new ChartPanel(chart) ;
 					pan.setBounds(10, 11, 515, 450);
@@ -214,33 +214,16 @@ public class PieChart extends JFrame {
 
 	}
 
-	private PieDataset createDataset() {
+	public PieDataset createPieDataset(ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 
-		ArrayList<String> c = new ArrayList<>();
-		ArrayList<Double> d = new ArrayList<>() ;
-        d = createTabDouble() ;
-		c = createTable();
+		
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < nom.size(); i++) {
 
-			dataset.setValue(c.get(i), new Double(d.get(i)));
+			dataset.setValue(nom.get(i), new Double(valeur.get(i)));
 
 		}
-
-//		for (int i = 0; i < 4; i++) {
-//
-//			c.remove(i) ;
-//
-//		}
-
-		// dataset.setValue(textField.getText(), new Double(43.2));
-		// dataset.setValue(textField_1.getText(), new Double(10.0));
-		// dataset.setValue(textField_2.getText(), new Double(27.5));
-		// dataset.setValue(textField_3.getText(), new Double(17.5));
-
-		System.out.println("Donner : " + c.get(0));
-		System.out.println(c.size());
 
 		return dataset;
 	}
@@ -268,10 +251,10 @@ public class PieChart extends JFrame {
 		return b ;
 	}
 
-	private JFreeChart createChart(PieDataset dataset) {
+	public JFreeChart createPieChart(String titre,PieDataset dataset) {
 		
          
-		JFreeChart chart = ChartFactory.createPieChart(textField.getText(), // chart
+		JFreeChart chart = ChartFactory.createPieChart(titre, // chart
 																				// title
 				dataset, // data
 				true, // include legend
@@ -290,10 +273,10 @@ public class PieChart extends JFrame {
 	}
 	
 	
-	private JFreeChart createChart3D(PieDataset dataset) {
+	public JFreeChart createChart3D(String titre,PieDataset dataset) {
 		
         
-		JFreeChart chart = ChartFactory.createPieChart3D(textField.getText(), // chart
+		JFreeChart chart = ChartFactory.createPieChart3D(titre, // chart
 																				// title
 				dataset, // data
 				true, // include legend

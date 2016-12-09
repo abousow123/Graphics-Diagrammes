@@ -171,10 +171,10 @@ public class LineChartStraight extends JFrame {
 		JFreeChart chart = ChartFactory.createLineChart(textField.getText(),
 				"realise", "Non classe", Dataset, PlotOrientation.VERTICAL, true,
 				true, false);
-		chart.setBackgroundPaint(Color.green);
+		chart.setBackgroundPaint(Color.LIGHT_GRAY);
 		
 		CategoryPlot plot = (CategoryPlot)chart.getPlot() ;
-		plot.setBackgroundPaint(Color.blue);
+		plot.setBackgroundPaint(Color.gray);
 		plot.setRangeGridlinePaint(Color.white);
 		
 		LineAndShapeRenderer renderer

@@ -22,6 +22,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class Area2 extends JFrame {
 
@@ -83,20 +84,20 @@ public class Area2 extends JFrame {
 		textField.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Category Axe");
-		lblNewLabel.setBounds(10, 64, 75, 14);
+		lblNewLabel.setBounds(10, 64, 100, 14);
 		panel.add(lblNewLabel);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(113, 64, 122, 20);
+		textField_1.setBounds(132, 61, 122, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 
 		JLabel lblValuesAxe = new JLabel("Values Axe");
-		lblValuesAxe.setBounds(10, 101, 63, 14);
+		lblValuesAxe.setBounds(10, 101, 78, 14);
 		panel.add(lblValuesAxe);
 
 		textField_2 = new JTextField();
-		textField_2.setBounds(113, 98, 122, 20);
+		textField_2.setBounds(132, 98, 122, 20);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 
@@ -143,12 +144,12 @@ public class Area2 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				panel_1.setVisible(true);
 				layeredPane.setLayer(panel_1, 0,0);
-				JFreeChart chart = createChart(createDataset()) ;
-				ChartPanel chartPanel = new ChartPanel(chart) ;
-				chartPanel.setBounds(11, 0, 483, 430);
-				
-				panel_1.add(chartPanel) ;
-				panel_1.repaint();
+//				JFreeChart chart = createChart(createDataset()) ;
+//				ChartPanel chartPanel = new ChartPanel(chart) ;
+//				chartPanel.setBounds(11, 0, 483, 430);
+//				
+//				panel_1.add(chartPanel) ;
+//				panel_1.repaint();
 				
 			}
 		});
@@ -168,22 +169,21 @@ public class Area2 extends JFrame {
 						null));
 	}
 
-	public DefaultCategoryDataset createDataset() {
+	public DefaultCategoryDataset createDataset(String nomSurface,ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-		dataset.setValue(new Double(textField_4.getText()), "ss",
-				textField_3.getText());
-		dataset.setValue(new Double(textField_6.getText()), "ss",
-				textField_5.getText());
-		dataset.setValue(new Double(textField_8.getText()), "ss",
-				textField_7.getText());
-
+		for(int i=0;i<nom.size();i++){
+			dataset.setValue(valeur.get(i), nomSurface,
+					nom.get(i));
+		}
+		
+		
 		return dataset;
 	}
 
-	public JFreeChart createChart(DefaultCategoryDataset dataset) {
-		JFreeChart chart = ChartFactory.createAreaChart(textField.getText(),
-				textField_1.getText(), textField_2.getText(), dataset,
+	public JFreeChart createChart(String titre,String axeX,String axeY,DefaultCategoryDataset dataset) {
+		JFreeChart chart = ChartFactory.createAreaChart(titre,
+				axeX, axeY, dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 		
 		return chart ;
