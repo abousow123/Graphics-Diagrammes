@@ -1,48 +1,32 @@
 package model_Principale;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
 
 import modelAreaChart.Area2;
 import model_Bar.BarChart;
+import model_Line.LineChartStraight;
 import model_Pie.PieChart;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.border.BevelBorder;
-
-import java.awt.Color;
-
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
-import javax.swing.JTextPane;
-import javax.swing.JEditorPane;
-import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.JProgressBar;
-import javax.swing.JSeparator;
-import javax.swing.JFormattedTextField;
-
-import java.awt.SystemColor;
-import java.util.ArrayList;
-
-import javax.swing.UIManager;
 
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -53,6 +37,8 @@ public class InterfaceCentrale extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	
+	JLabel lblDonnesX ;
 
 	JTextPane textPane;
 	JTextPane textPane_1;
@@ -61,6 +47,8 @@ public class InterfaceCentrale extends JFrame {
 
 	String[] typeGraphe = { "Barres", "Linèaire", "Circulaire", "Surface" };
 	private JTextField textField_4;
+	
+	JCheckBox chckbxEnd ;
 
 	/**
 	 * Launch the application.
@@ -100,6 +88,16 @@ public class InterfaceCentrale extends JFrame {
 		panel.setLayout(null);
 
 		comboBox = new JComboBox(typeGraphe);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comboBox.getSelectedItem().toString()
+						.equalsIgnoreCase(typeGraphe[1])) {
+					lblDonnesX.setText("Abou");
+					chckbxEnd.setVisible(false);
+					textField.setVisible(false);
+				}
+			}
+		});
 		comboBox.setBounds(233, 21, 100, 20);
 		panel.add(comboBox);
 
@@ -134,7 +132,7 @@ public class InterfaceCentrale extends JFrame {
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 
-		JCheckBox chckbxEnd = new JCheckBox("en 3D");
+		chckbxEnd = new JCheckBox("en 3D");
 		chckbxEnd.setBounds(10, 183, 97, 23);
 		panel.add(chckbxEnd);
 
@@ -168,7 +166,7 @@ public class InterfaceCentrale extends JFrame {
 		textPane.setBounds(10, 46, 115, 111);
 		panel_1.add(textPane);
 
-		JLabel lblDonnesX = new JLabel("Donn\u00E9es X");
+		lblDonnesX = new JLabel("Donnees X");
 		lblDonnesX.setBounds(10, 21, 62, 14);
 		panel_1.add(lblDonnesX);
 
@@ -176,7 +174,7 @@ public class InterfaceCentrale extends JFrame {
 		textPane_1.setBounds(173, 46, 115, 111);
 		panel_1.add(textPane_1);
 
-		JLabel lblDonnesY = new JLabel("Donn\u00E9es Y");
+		JLabel lblDonnesY = new JLabel("Donnees Y");
 		lblDonnesY.setBounds(177, 21, 62, 14);
 		panel_1.add(lblDonnesY);
 
@@ -194,63 +192,93 @@ public class InterfaceCentrale extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBox.getSelectedItem().toString()
 						.equalsIgnoreCase(typeGraphe[2])) {
-					JFreeChart chart = null ;
-					
-					if(chckbxEnd.isSelected()){
+					JFreeChart chart = null;
+
+					if (chckbxEnd.isSelected()) {
 						PieChart pie = new PieChart();
-						PieDataset dataset = pie.createPieDataset(createDonneX(),
-								createDonneY());
+						PieDataset dataset = pie.createPieDataset(
+								createDonneX(), createDonneY());
 						chart = pie.createChart3D(textField.getText(), dataset);
-						ChartFrame frame = new ChartFrame(textField.getText(), chart) ;
+						ChartFrame frame = new ChartFrame(textField.getText(),
+								chart);
 						frame.setBounds(100, 100, 709, 614);
 						frame.setVisible(true);
 					}
-					
+
 					else {
 						PieChart pie = new PieChart();
-						PieDataset dataset = pie.createPieDataset(createDonneX(),
-								createDonneY());
+						PieDataset dataset = pie.createPieDataset(
+								createDonneX(), createDonneY());
 						chart = pie.createPieChart(textField.getText(), dataset);
-						ChartFrame frame = new ChartFrame(textField.getText(), chart) ;
+						ChartFrame frame = new ChartFrame(textField.getText(),
+								chart);
 						frame.setBounds(100, 100, 709, 614);
 						frame.setVisible(true);
 					}
-					
+
 				}
-				
-				//BarChart
-				
+
+				// BarChart
+
 				if (comboBox.getSelectedItem().toString()
 						.equalsIgnoreCase(typeGraphe[0])) {
-					JFreeChart chart = null ;
-					BarChart bar = new BarChart() ;
-					DefaultCategoryDataset dataset = bar.createBarDataset(textField_1.getText(), createDonneX(), createDonneY()) ;
-					if(chckbxEnd.isSelected()){
-						
-						chart = bar.creteFreeChart3D(textField.getText(),textField_1.getText(),textField_2.getText(), dataset) ;
-					
-						ChartFrame frame = new ChartFrame(textField.getText(), chart) ;
+					JFreeChart chart = null;
+					BarChart bar = new BarChart();
+					DefaultCategoryDataset dataset = bar.createBarDataset(
+							textField_1.getText(), createDonneX(),
+							createDonneY());
+					if (chckbxEnd.isSelected()) {
+
+						chart = bar.creteFreeChart3D(textField.getText(),
+								textField_1.getText(), textField_2.getText(),
+								dataset);
+
+						ChartFrame frame = new ChartFrame(textField.getText(),
+								chart);
 						frame.setBounds(100, 100, 709, 614);
 						frame.setVisible(true);
 					}
-					
+
 					else {
-						
-						chart = bar.creteFreeChart(textField.getText(),textField_1.getText(),textField_2.getText(), dataset) ;
-						
-						ChartFrame frame = new ChartFrame(textField.getText(), chart) ;
+
+						chart = bar.creteFreeChart(textField.getText(),
+								textField_1.getText(), textField_2.getText(),
+								dataset);
+
+						ChartFrame frame = new ChartFrame(textField.getText(),
+								chart);
 						frame.setBounds(100, 100, 709, 614);
 						frame.setVisible(true);
 					}
-					
+
 				}
-				
-				if (comboBox.getSelectedItem().toString().equalsIgnoreCase(typeGraphe[3])){
-					JFreeChart chart = null ;
-					Area2 area = new Area2() ;
-					DefaultCategoryDataset dataset = area.createDataset(textField_4.getText(), createDonneX(), createDonneY()) ;
-					chart = area.createChart(textField.getText(), textField_1.getText(), textField_2.getText(), dataset) ;
-					ChartFrame frame = new ChartFrame(textField.getText(), chart) ;
+
+				if (comboBox.getSelectedItem().toString()
+						.equalsIgnoreCase(typeGraphe[3])) {
+					JFreeChart chart = null;
+					Area2 area = new Area2();
+					DefaultCategoryDataset dataset = area.createDataset(
+							textField_4.getText(), createDonneX(),
+							createDonneY());
+					chart = area.createChart(textField.getText(),
+							textField_1.getText(), textField_2.getText(),
+							dataset);
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+				}
+				if (comboBox.getSelectedItem().toString()
+						.equalsIgnoreCase(typeGraphe[1])) {
+					JFreeChart chart = null;
+					LineChartStraight line = new LineChartStraight();
+					CategoryDataset dataset = line.createLineDataset(
+							createDonneX(), createDonneY());
+					chart = line.createChartLine(textField.getText(),
+							textField_1.getText(), textField_2.getText(),
+							textField_4.getText(), dataset);
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
 					frame.setBounds(100, 100, 709, 614);
 					frame.setVisible(true);
 				}

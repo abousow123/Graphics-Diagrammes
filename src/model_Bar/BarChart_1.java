@@ -1,7 +1,6 @@
 package model_Bar;
 
 import java.awt.EventQueue;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,25 +8,19 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-
-import com.sun.prism.paint.Color;
-
-import javax.swing.JLayeredPane;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.JRadioButton;
 
 public class BarChart_1 extends JFrame {
 
@@ -92,7 +85,7 @@ public class BarChart_1 extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 
-		JLabel lblCatgorieaxe = new JLabel("Cat\u00E9gorieAxe");
+		JLabel lblCatgorieaxe = new JLabel("CategorieAxe");
 		lblCatgorieaxe.setBounds(10, 60, 76, 14);
 		contentPane.add(lblCatgorieaxe);
 
@@ -214,7 +207,7 @@ public class BarChart_1 extends JFrame {
 
 				JFreeChart chart = null;
 
-				chart = createBarChart1(createBarChart1());
+				chart = createBarChart1(createBarGroupe(textField.getText(),createTabNom1(),createTabValeur1()));
 
 				ChartPanel frame = new ChartPanel(chart);
 				frame.setBounds(10, 11, 691, 500);
@@ -271,18 +264,16 @@ public class BarChart_1 extends JFrame {
 		return b;
 	}
 
-	public DefaultCategoryDataset createBarChart1() {
+	public DefaultCategoryDataset createBarGroupe(String nomGroupe,ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		ArrayList<Double> a = createTabValeur1();
 		ArrayList<String> b = createTabNom1();
 
-		for (int i = 0; i < 3; i++) {
-			dataset.setValue(a.get(i), b.get(i), textField_3.getText());
+		for (int i = 0; i < nom.size(); i++) {
+			dataset.setValue(a.get(i), b.get(i), nomGroupe);
 		}
 
-		for (int i = 3; i < 6; i++) {
-			dataset.setValue(a.get(i), b.get(i), textField_10.getText());
-		}
+		
 
 		
 		return dataset;

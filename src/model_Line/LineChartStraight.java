@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import org.jfree.chart.ChartFactory;
@@ -20,9 +22,11 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import javax.swing.border.BevelBorder;
+import org.jfree.ui.HorizontalAlignment;
+import org.jfree.ui.RectangleEdge;
 
 public class LineChartStraight extends JFrame {
 
@@ -128,13 +132,13 @@ public class LineChartStraight extends JFrame {
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panel.setVisible(true);
-				layeredPane.setLayer(panel, 0, 0);
-				JFreeChart chart = createChart(createDataset());
+//				layeredPane.setLayer(panel, 0, 0);
+//				JFreeChart chart = createChart(createDataset());
+//				
+//				 ChartPanel chartPanel = new ChartPanel(chart) ;
+//				chartPanel.setBounds(10, 11, 800, 400);
 				
-				 ChartPanel chartPanel = new ChartPanel(chart) ;
-				chartPanel.setBounds(10, 11, 800, 400);
-				
-				panel.add(chartPanel) ;
+			//	panel.add(chartPanel) ;
 				panel.repaint();
 				
 			}
@@ -154,27 +158,31 @@ public class LineChartStraight extends JFrame {
 		panel.setVisible(false);
 	}
 
-	private static CategoryDataset createDataset() {
+	public CategoryDataset createLineDataset(ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-		dataset.addValue(new Double(textField_2.getText()),
-				textField_7.getText(), textField_1.getText());
-		dataset.addValue(new Double(textField_4.getText()),
-				textField_7.getText(), textField_3.getText());
-		dataset.addValue(new Double(textField_6.getText()),
-				textField_7.getText(), textField_5.getText());
+		
+		for(int i=0; i<nom.size() ; i++){
+			dataset.addValue(new Double(valeur.get(i)),
+					"", nom.get(i));
+		}
 
 		return dataset;
 	}
 
-	private static JFreeChart createChart(CategoryDataset Dataset) {
-		JFreeChart chart = ChartFactory.createLineChart(textField.getText(),
-				"realise", "Non classe", Dataset, PlotOrientation.VERTICAL, true,
+	public JFreeChart createChartLine(String titre,String axeX,String axeY,String source,CategoryDataset Dataset) {
+		JFreeChart chart = ChartFactory.createLineChart(titre,
+				axeX,axeY, Dataset, PlotOrientation.VERTICAL, true,
 				true, false);
-		chart.setBackgroundPaint(Color.LIGHT_GRAY);
+		chart.setBackgroundPaint(Color.WHITE);
+		
+		TextTitle sourc = new TextTitle(source);
+				sourc.setFont(new Font("SansSerif", Font.PLAIN, 10));
+				sourc.setPosition(RectangleEdge.BOTTOM);
+				sourc.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+				chart.addSubtitle(sourc);
 		
 		CategoryPlot plot = (CategoryPlot)chart.getPlot() ;
-		plot.setBackgroundPaint(Color.gray);
+		plot.setBackgroundPaint(Color.LIGHT_GRAY);
 		plot.setRangeGridlinePaint(Color.white);
 		
 		LineAndShapeRenderer renderer
