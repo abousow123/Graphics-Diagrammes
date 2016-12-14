@@ -181,10 +181,19 @@ public class Area2 extends JFrame {
 		return dataset;
 	}
 
-	public JFreeChart createChart(String titre,String axeX,String axeY,DefaultCategoryDataset dataset) {
-		JFreeChart chart = ChartFactory.createAreaChart(titre,
+	public JFreeChart createChart(String titre,String axeX,String axeY,DefaultCategoryDataset dataset,boolean legende) {
+		JFreeChart chart = null ;
+		
+		if(legende==true){
+		        chart = ChartFactory.createAreaChart(titre,
 				axeX, axeY, dataset,
 				PlotOrientation.VERTICAL, true, true, false);
+		}
+		else {
+			chart = ChartFactory.createAreaChart(titre,
+					axeX, axeY, dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		}
 		
 		return chart ;
 	}

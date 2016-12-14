@@ -3,6 +3,7 @@ package model_Principale;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,18 +31,29 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
 
+import java.awt.Font;
+import java.awt.GridLayout;
+
 public class InterfaceCentrale extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
 	
 	JLabel lblDonnesX ;
 
 	JTextPane textPane;
-	JTextPane textPane_1;
+	JTextPane textPane_1 ;
+	JTextPane textPane_2 ;
+	JTextPane textPane_6 ;
+	JTextPane textPane_4 ;
+	JTextPane textPane_5 ;
+	JTextPane textPane_3 ;
+	JTextPane textPane_9 ;
+	JTextPane textPane_10 ;
+	JTextPane textPane_11 ;
+	JTextPane textPane_8 ;
 
 	JComboBox comboBox;
 
@@ -49,6 +61,11 @@ public class InterfaceCentrale extends JFrame {
 	private JTextField textField_4;
 	
 	JCheckBox chckbxEnd ;
+	JCheckBox chckbxLegende ;
+	JCheckBox chckbxWaterfa ;
+	
+	  int  counter = 0 ;
+	  int decounter = 0 ;
 
 	/**
 	 * Launch the application.
@@ -59,11 +76,13 @@ public class InterfaceCentrale extends JFrame {
 				try {
 					InterfaceCentrale frame = new InterfaceCentrale();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
 	}
 
 	/**
@@ -71,7 +90,7 @@ public class InterfaceCentrale extends JFrame {
 	 */
 	public InterfaceCentrale() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 709, 614);
+		setBounds(100, 100, 818, 614);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -83,7 +102,7 @@ public class InterfaceCentrale extends JFrame {
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0,
 						255)));
 		panel.setToolTipText("sdsd");
-		panel.setBounds(128, 11, 555, 252);
+		panel.setBounds(169, 0, 623, 252);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -93,8 +112,8 @@ public class InterfaceCentrale extends JFrame {
 				if (comboBox.getSelectedItem().toString()
 						.equalsIgnoreCase(typeGraphe[1])) {
 					lblDonnesX.setText("Abou");
-					chckbxEnd.setVisible(false);
-					textField.setVisible(false);
+					//chckbxEnd.setVisible(false);
+					//textField.setVisible(false);
 				}
 			}
 		});
@@ -136,7 +155,7 @@ public class InterfaceCentrale extends JFrame {
 		chckbxEnd.setBounds(10, 183, 97, 23);
 		panel.add(chckbxEnd);
 
-		JCheckBox chckbxLegende = new JCheckBox("Legende");
+		chckbxLegende = new JCheckBox("Legende");
 		chckbxLegende.setBounds(109, 183, 97, 23);
 		panel.add(chckbxLegende);
 
@@ -151,41 +170,36 @@ public class InterfaceCentrale extends JFrame {
 		textField_4 = new JTextField();
 		textField_4.setBounds(247, 134, 86, 20);
 		panel.add(textField_4);
-		textField_4.setColumns(10);
+		textField_4.setColumns(10); 
+		
+		chckbxWaterfa = new JCheckBox("Waterfall");
+		chckbxWaterfa.setBounds(349, 183, 97, 23);
+		panel.add(chckbxWaterfa);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Donn\u00E9es graphique",
+				.getBorder("TitledBorder.border"), "Donnees graphique",
 				TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(128, 274, 555, 291);
+		panel_1.setBounds(169, 257, 623, 297);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
 		textPane = new JTextPane();
-		textPane.setBounds(10, 46, 115, 111);
+		textPane.setBounds(10, 46, 105, 111);
 		panel_1.add(textPane);
 
 		lblDonnesX = new JLabel("Donnees X");
 		lblDonnesX.setBounds(10, 21, 62, 14);
 		panel_1.add(lblDonnesX);
 
-		textPane_1 = new JTextPane();
-		textPane_1.setBounds(173, 46, 115, 111);
-		panel_1.add(textPane_1);
-
 		JLabel lblDonnesY = new JLabel("Donnees Y");
-		lblDonnesY.setBounds(177, 21, 62, 14);
+		lblDonnesY.setBounds(153, 21, 62, 14);
 		panel_1.add(lblDonnesY);
 
 		JLabel lblGroupe = new JLabel("Groupe");
-		lblGroupe.setBounds(117, 171, 46, 14);
+		lblGroupe.setBounds(80, 168, 46, 14);
 		panel_1.add(lblGroupe);
-
-		textField_3 = new JTextField();
-		textField_3.setBounds(173, 168, 115, 20);
-		panel_1.add(textField_3);
-		textField_3.setColumns(10);
 
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -198,7 +212,7 @@ public class InterfaceCentrale extends JFrame {
 						PieChart pie = new PieChart();
 						PieDataset dataset = pie.createPieDataset(
 								createDonneX(), createDonneY());
-						chart = pie.createChart3D(textField.getText(), dataset);
+						chart = pie.createChart3D(textField.getText(), dataset,chckbxLegende.isSelected());
 						ChartFrame frame = new ChartFrame(textField.getText(),
 								chart);
 						frame.setBounds(100, 100, 709, 614);
@@ -209,7 +223,7 @@ public class InterfaceCentrale extends JFrame {
 						PieChart pie = new PieChart();
 						PieDataset dataset = pie.createPieDataset(
 								createDonneX(), createDonneY());
-						chart = pie.createPieChart(textField.getText(), dataset);
+						chart = pie.createPieChart(textField.getText(), dataset,chckbxLegende.isSelected());
 						ChartFrame frame = new ChartFrame(textField.getText(),
 								chart);
 						frame.setBounds(100, 100, 709, 614);
@@ -231,7 +245,7 @@ public class InterfaceCentrale extends JFrame {
 
 						chart = bar.creteFreeChart3D(textField.getText(),
 								textField_1.getText(), textField_2.getText(),
-								dataset);
+								dataset,chckbxLegende.isSelected());
 
 						ChartFrame frame = new ChartFrame(textField.getText(),
 								chart);
@@ -243,7 +257,7 @@ public class InterfaceCentrale extends JFrame {
 
 						chart = bar.creteFreeChart(textField.getText(),
 								textField_1.getText(), textField_2.getText(),
-								dataset);
+								dataset,chckbxLegende.isSelected());
 
 						ChartFrame frame = new ChartFrame(textField.getText(),
 								chart);
@@ -262,7 +276,7 @@ public class InterfaceCentrale extends JFrame {
 							createDonneY());
 					chart = area.createChart(textField.getText(),
 							textField_1.getText(), textField_2.getText(),
-							dataset);
+							dataset,chckbxLegende.isSelected());
 					ChartFrame frame = new ChartFrame(textField.getText(),
 							chart);
 					frame.setBounds(100, 100, 709, 614);
@@ -271,21 +285,158 @@ public class InterfaceCentrale extends JFrame {
 				if (comboBox.getSelectedItem().toString()
 						.equalsIgnoreCase(typeGraphe[1])) {
 					JFreeChart chart = null;
+					if (chckbxEnd.isSelected()){
+						LineChartStraight line = new LineChartStraight();
+						CategoryDataset dataset = line.createLineDataset(
+								createDonneX(), createDonneY());
+						chart = line.createChartLine3D(textField.getText(),
+								textField_1.getText(), textField_2.getText(),
+								textField_4.getText(), dataset,chckbxLegende.isSelected());
+						ChartFrame frame = new ChartFrame(textField.getText(),
+								chart);
+						frame.setBounds(100, 100, 709, 614);
+						frame.setVisible(true);
+					}
+					else{
 					LineChartStraight line = new LineChartStraight();
 					CategoryDataset dataset = line.createLineDataset(
 							createDonneX(), createDonneY());
 					chart = line.createChartLine(textField.getText(),
 							textField_1.getText(), textField_2.getText(),
-							textField_4.getText(), dataset);
+							textField_4.getText(), dataset,chckbxLegende.isSelected());
 					ChartFrame frame = new ChartFrame(textField.getText(),
 							chart);
 					frame.setBounds(100, 100, 709, 614);
 					frame.setVisible(true);
+					}
 				}
 			}
 		});
-		btnNewButton.setBounds(105, 243, 115, 37);
+		btnNewButton.setBounds(105, 219, 115, 37);
 		panel_1.add(btnNewButton);
+		
+		JButton button = new JButton("+");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Toolkit.getDefaultToolkit().beep();
+				counter++ ;
+				if(counter==1){
+					textPane_4.setVisible(true);
+					textPane_9.setVisible(true);
+				}
+				if(counter==2){
+					textPane_5.setVisible(true);
+					textPane_10.setVisible(true);
+				}
+				if(counter==3){
+					textPane_6.setVisible(true);
+					textPane_11.setVisible(true);
+				}
+				if(counter==4){
+					textPane_3.setVisible(true);
+					textPane_8.setVisible(true);
+					counter = 0 ;
+				}
+				
+				
+				System.out.println(""+counter);
+			}
+		});
+		button.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		button.setBounds(261, 223, 46, 23);
+		panel_1.add(button);
+		
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.LIGHT_GRAY);
+		panel_2.setBounds(230, 46, 344, 111);
+		panel_1.add(panel_2);
+		GridLayout g1 = new GridLayout() ;
+		GridLayout gl_panel_2 = new GridLayout(1,4);
+		gl_panel_2.setHgap(8);
+		panel_2.setLayout(gl_panel_2);
+		
+		textPane_4 = new JTextPane();
+		textPane_4.setVisible(false);
+		panel_2.add(textPane_4);
+		
+		textPane_5 = new JTextPane();
+		textPane_5.setVisible(false);
+		panel_2.add(textPane_5);
+		
+		textPane_6 = new JTextPane();
+		textPane_6.setVisible(false);
+		panel_2.add(textPane_6);
+		
+		textPane_3 = new JTextPane();
+		textPane_3.setVisible(false);
+		panel_2.add(textPane_3);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.LIGHT_GRAY);
+		panel_3.setBounds(230, 166, 344, 23);
+		panel_1.add(panel_3);
+		panel_3.setLayout(new GridLayout(1, 0, 8, 0));
+		
+		textPane_9 = new JTextPane();
+		textPane_9.setVisible(false);
+		panel_3.add(textPane_9);
+		
+		textPane_10 = new JTextPane();
+		textPane_10.setVisible(false);
+		panel_3.add(textPane_10);
+		
+		textPane_11 = new JTextPane();
+		textPane_11.setVisible(false);
+		panel_3.add(textPane_11);
+		
+		textPane_8 = new JTextPane();
+		textPane_8.setVisible(false);
+		panel_3.add(textPane_8);
+		
+		textPane_2 = new JTextPane();
+		textPane_2.setBounds(139, 46, 81, 111);
+		panel_1.add(textPane_2);
+		
+		JTextPane textPane_7 = new JTextPane();
+		textPane_7.setBounds(139, 166, 84, 23);
+		panel_1.add(textPane_7);
+		
+		JButton button_1 = new JButton("-");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Toolkit.getDefaultToolkit().beep();
+				decounter++ ;
+				if(decounter==1){
+					textPane_4.setVisible(false);
+					textPane_9.setVisible(false);
+					counter = 0  ;
+				}
+				if(decounter==2){
+					textPane_5.setVisible(false);
+					textPane_10.setVisible(false);
+				}
+				if(decounter==3){
+					textPane_6.setVisible(false);
+					textPane_11.setVisible(false);
+				}
+				if(decounter==4){
+					textPane_3.setVisible(false);
+					textPane_8.setVisible(false);
+					decounter = 0 ;
+				}
+				
+			}
+		});
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		button_1.setBounds(317, 223, 46, 23);
+		panel_1.add(button_1);
+		
+		JPanel panel_menu = new JPanel();
+		panel_menu.setBounds(10, 11, 149, 554);
+		contentPane.add(panel_menu);
+		panel_menu.setLayout(null);
 
 		// tabDonneeX = new ArrayList<>() ;
 
@@ -311,5 +462,4 @@ public class InterfaceCentrale extends JFrame {
 		return tabDonneeY;
 
 	}
-
 }

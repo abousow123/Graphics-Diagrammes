@@ -169,10 +169,58 @@ public class LineChartStraight extends JFrame {
 		return dataset;
 	}
 
-	public JFreeChart createChartLine(String titre,String axeX,String axeY,String source,CategoryDataset Dataset) {
-		JFreeChart chart = ChartFactory.createLineChart(titre,
+	public JFreeChart createChartLine(String titre,String axeX,String axeY,String source,CategoryDataset Dataset,boolean legende) {
+		
+		JFreeChart chart = null ;
+		if(legende==true){
+		 chart = ChartFactory.createLineChart(titre,
 				axeX,axeY, Dataset, PlotOrientation.VERTICAL, true,
 				true, false);
+		}
+		
+		else{
+			 chart = ChartFactory.createLineChart(titre,
+					axeX,axeY, Dataset, PlotOrientation.VERTICAL, false,
+					true, false);
+			}
+		
+		chart.setBackgroundPaint(Color.WHITE);
+		
+		TextTitle sourc = new TextTitle(source);
+				sourc.setFont(new Font("SansSerif", Font.PLAIN, 10));
+				sourc.setPosition(RectangleEdge.BOTTOM);
+				sourc.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+				chart.addSubtitle(sourc);
+		
+		CategoryPlot plot = (CategoryPlot)chart.getPlot() ;
+		plot.setBackgroundPaint(Color.LIGHT_GRAY);
+		plot.setRangeGridlinePaint(Color.white);
+		
+		LineAndShapeRenderer renderer
+		= (LineAndShapeRenderer) plot.getRenderer();
+		renderer.setShapesVisible(true);
+		renderer.setDrawOutlines(true);
+		renderer.setUseFillPaint(true);
+		renderer.setFillPaint(Color.white);
+		
+		return chart ;
+	}
+	
+	public JFreeChart createChartLine3D(String titre,String axeX,String axeY,String source,CategoryDataset Dataset,boolean legende) {
+		
+		JFreeChart chart = null ;
+		if(legende==true){
+		 chart = ChartFactory.createLineChart3D(titre,
+				axeX,axeY, Dataset, PlotOrientation.VERTICAL, true,
+				true, false);
+		}
+		
+		else{
+			 chart = ChartFactory.createLineChart3D(titre,
+					axeX,axeY, Dataset, PlotOrientation.VERTICAL, false,
+					true, false);
+			}
+		
 		chart.setBackgroundPaint(Color.WHITE);
 		
 		TextTitle sourc = new TextTitle(source);

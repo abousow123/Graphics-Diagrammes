@@ -292,16 +292,16 @@ public class BarChart extends JFrame {
 				panel_4.setVisible(false);
 				panel_3.setVisible(false);
 				panel_5.setVisible(false);
-				chart = creteFreeChart(textField.getText(), textField_1.getText(),
-						textField_10.getText(),createBarDataset(textField_1.getText(),
-						 createTabNom(),
-						createTabValeur()));
-
-				ChartPanel frame = new ChartPanel(chart);
-				frame.setBounds(10, 29, 600, 450);
-				frame.setVisible(true);
-
-				panel_2.add(frame);
+//				chart = creteFreeChart(textField.getText(), textField_1.getText(),
+//						textField_10.getText(),createBarDataset(textField_1.getText(),
+//						 createTabNom(),
+//						createTabValeur()));
+//
+//				ChartPanel frame = new ChartPanel(chart);
+//				frame.setBounds(10, 29, 600, 450);
+//				frame.setVisible(true);
+//
+//				panel_2.add(frame);
 				panel_2.repaint();
 			}
 
@@ -313,15 +313,15 @@ public class BarChart extends JFrame {
 				panel_4.setVisible(false);
 				panel_5.setVisible(false);
 
-				chart = creteFreeChart3D(textField.getText(), textField_1.getText(),
-						textField_10.getText(),createBarDataset(textField_1.getText(),
-								 createTabNom(),
-								createTabValeur()));
-
-				ChartPanel frame = new ChartPanel(chart);
-				frame.setBounds(10, 29, 600, 450);
-				// frame.setVisible(true);
-				panel_3.add(frame);
+//				chart = creteFreeChart3D(textField.getText(), textField_1.getText(),
+//						textField_10.getText(),createBarDataset(textField_1.getText(),
+//								 createTabNom(),
+//								createTabValeur()));
+//
+//				ChartPanel frame = new ChartPanel(chart);
+//				frame.setBounds(10, 29, 600, 450);
+//				// frame.setVisible(true);
+//				panel_3.add(frame);
 				panel_3.repaint();
 			}
 
@@ -331,13 +331,13 @@ public class BarChart extends JFrame {
 				panel_2.setVisible(false);
 				panel_3.setVisible(false);
 				panel_5.setVisible(false);
-				chart = creteFreeChartWaterfall(createBarDataset(textField_1.getText(),
-						createTabNom(), createTabValeur()));
-
-				ChartPanel frame = new ChartPanel(chart);
-				frame.setBounds(10, 29, 600, 450);
-
-				panel_4.add(frame);
+//				chart = creteFreeChartWaterfall(createBarDataset(textField_1.getText(),
+//						createTabNom(), createTabValeur()));
+//
+//				ChartPanel frame = new ChartPanel(chart);
+//				frame.setBounds(10, 29, 600, 450);
+//
+//				panel_4.add(frame);
 				panel_4.repaint();
 			}
 
@@ -395,27 +395,42 @@ public class BarChart extends JFrame {
 	}
 
 	public JFreeChart creteFreeChart(String titre, String axeX, String axeY,
-			DefaultCategoryDataset dataset) {
+			DefaultCategoryDataset dataset,boolean legende) {
 		JFreeChart chart = null;
-
+        if(legende==true){
 		chart = ChartFactory.createBarChart(titre, axeX, axeY, dataset,
-				PlotOrientation.VERTICAL, false, true, false);
-		CategoryPlot plot = chart.getCategoryPlot();
-		plot.setRangeGridlinePaint(java.awt.Color.black);
+				PlotOrientation.VERTICAL, true, true, false);
+		
+        }
+        
+        else {
+        	chart = ChartFactory.createBarChart(titre, axeX, axeY, dataset,
+    				PlotOrientation.VERTICAL, false, true, false);
+		}
 
+        CategoryPlot plot = chart.getCategoryPlot();
+		plot.setRangeGridlinePaint(java.awt.Color.black);
+		
 		return chart;
 	}
 
 	public JFreeChart creteFreeChart3D(String titre, String axeX, String axeY,
-			DefaultCategoryDataset dataset) {
+			DefaultCategoryDataset dataset,boolean legende) {
 		JFreeChart chart = null;
 
+		if(legende==true){
 		chart = ChartFactory.createBarChart3D(titre, axeX, axeY, dataset,
-				PlotOrientation.VERTICAL, false, true, false);
+				PlotOrientation.VERTICAL, true, true, false);
+		
+		}
+
+		else {
+			chart = ChartFactory.createBarChart3D(titre, axeX, axeY, dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		}
+		
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);
-
-		// plot.setWeight(5);
 
 		return chart;
 	}
@@ -431,12 +446,13 @@ public class BarChart extends JFrame {
 
 	}
 
-	public JFreeChart creteFreeChartWaterfall(DefaultCategoryDataset dataset) {
+	public JFreeChart creteFreeChartWaterfall(String titre, String axeX, String axeY,
+			DefaultCategoryDataset dataset,boolean legende) {
 		JFreeChart chart = null;
 
 		chart = ChartFactory.createWaterfallChart(textField.getText(),
 				textField_1.getText(), textField_10.getText(), dataset,
-				PlotOrientation.VERTICAL, false, true, false);
+				PlotOrientation.VERTICAL, true, true, false);
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);
 
