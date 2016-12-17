@@ -22,6 +22,7 @@ import javax.swing.border.TitledBorder;
 
 import modelAreaChart.Area2;
 import model_Bar.BarChart;
+import model_Bar.BarChart_1;
 import model_Line.LineChartStraight;
 import model_Pie.PieChart;
 
@@ -33,6 +34,8 @@ import org.jfree.data.general.PieDataset;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+
+import javax.swing.JTable;
 
 public class InterfaceCentrale extends JFrame {
 
@@ -50,22 +53,30 @@ public class InterfaceCentrale extends JFrame {
 	JTextPane textPane_4 ;
 	JTextPane textPane_5 ;
 	JTextPane textPane_3 ;
-	JTextPane textPane_9 ;
+	JTextPane txtpnScxc ;
 	JTextPane textPane_10 ;
 	JTextPane textPane_11 ;
 	JTextPane textPane_8 ;
+	JTextPane textPane_7 ;
 
 	JComboBox comboBox;
 
-	String[] typeGraphe = { "Barres", "Linèaire", "Circulaire", "Surface" };
+	String[] typeGraphe = { "Barres","Serie de barres", "Linèaire", "Circulaire", "Surface","Serie de Surfaces"};
 	private JTextField textField_4;
 	
 	JCheckBox chckbxEnd ;
 	JCheckBox chckbxLegende ;
 	JCheckBox chckbxWaterfa ;
 	
-	  int  counter = 0 ;
+	JLabel lblDonnesY ;
+	JLabel lblDonneesY ;
+	JLabel lblDonneesY_1 ;
+	JLabel lblDonneesY_2 ;
+	JLabel lblDonneesY_3 ;
+	
+	  static int  counter = 0 ;
 	  int decounter = 0 ;
+	  private JTable table;
 
 	/**
 	 * Launch the application.
@@ -90,7 +101,7 @@ public class InterfaceCentrale extends JFrame {
 	 */
 	public InterfaceCentrale() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 818, 614);
+		setBounds(100, 100, 845, 614);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -101,17 +112,19 @@ public class InterfaceCentrale extends JFrame {
 				null, null, null, null), "Param\u00E9tre Graphe",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0,
 						255)));
-		panel.setToolTipText("sdsd");
-		panel.setBounds(169, 0, 623, 252);
+		panel.setToolTipText("");
+		panel.setBounds(10, 11, 663, 252);
 		contentPane.add(panel);
 		panel.setLayout(null);
-
+		
+		counter = 0 ;
+         System.out.println(counter);
 		comboBox = new JComboBox(typeGraphe);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBox.getSelectedItem().toString()
 						.equalsIgnoreCase(typeGraphe[1])) {
-					lblDonnesX.setText("Abou");
+					//lblDonnesX.setText("");
 					//chckbxEnd.setVisible(false);
 					//textField.setVisible(false);
 				}
@@ -181,7 +194,7 @@ public class InterfaceCentrale extends JFrame {
 				.getBorder("TitledBorder.border"), "Donnees graphique",
 				TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(169, 257, 623, 297);
+		panel_1.setBounds(10, 268, 663, 297);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -193,19 +206,19 @@ public class InterfaceCentrale extends JFrame {
 		lblDonnesX.setBounds(10, 21, 62, 14);
 		panel_1.add(lblDonnesX);
 
-		JLabel lblDonnesY = new JLabel("Donnees Y");
-		lblDonnesY.setBounds(153, 21, 62, 14);
+		lblDonnesY = new JLabel("Donnees Y");
+		lblDonnesY.setBounds(139, 21, 62, 14);
 		panel_1.add(lblDonnesY);
 
 		JLabel lblGroupe = new JLabel("Groupe");
 		lblGroupe.setBounds(80, 168, 46, 14);
 		panel_1.add(lblGroupe);
 
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("valider");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[2])) {
+						.equalsIgnoreCase(typeGraphe[3])) {
 					JFreeChart chart = null;
 
 					if (chckbxEnd.isSelected()) {
@@ -268,8 +281,9 @@ public class InterfaceCentrale extends JFrame {
 				}
 
 				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[3])) {
+						.equalsIgnoreCase(typeGraphe[4])) {
 					JFreeChart chart = null;
+					
 					Area2 area = new Area2();
 					DefaultCategoryDataset dataset = area.createDataset(
 							textField_4.getText(), createDonneX(),
@@ -281,9 +295,10 @@ public class InterfaceCentrale extends JFrame {
 							chart);
 					frame.setBounds(100, 100, 709, 614);
 					frame.setVisible(true);
+					
 				}
 				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[1])) {
+						.equalsIgnoreCase(typeGraphe[2])) {
 					JFreeChart chart = null;
 					if (chckbxEnd.isSelected()){
 						LineChartStraight line = new LineChartStraight();
@@ -310,6 +325,41 @@ public class InterfaceCentrale extends JFrame {
 					frame.setVisible(true);
 					}
 				}
+				
+				if(comboBox.getSelectedItem().toString().equalsIgnoreCase(typeGraphe[1])){
+					JFreeChart chart = null;
+					BarChart_1 b = new BarChart_1() ;
+					DefaultCategoryDataset dataset = createBarDataset(counter) ;
+					chart = b.createBarChart1(dataset) ;
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+					
+				}
+				
+				if (comboBox.getSelectedItem().toString()
+						.equalsIgnoreCase(typeGraphe[5])){
+					JFreeChart chart = null;
+					Area2 b = new Area2() ;
+					if (chckbxEnd.isSelected()){
+					CategoryDataset dataset = createAreaDataset(counter) ;
+					chart = b.createAreaSerieChart3D(textField.getText(), textField_1.getText(), textField_2.getText(),
+							 dataset,chckbxLegende.isSelected()) ;
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+					}else {
+						CategoryDataset dataset = createAreaDataset(counter) ;
+						chart = b.createAreaSerieChart(textField.getText(), textField_1.getText(), textField_2.getText(),
+								 dataset,chckbxLegende.isSelected()) ;
+						ChartFrame frame = new ChartFrame(textField.getText(),
+								chart);
+						frame.setBounds(100, 100, 709, 614);
+						frame.setVisible(true);
+					}
+				}
 			}
 		});
 		btnNewButton.setBounds(105, 219, 115, 37);
@@ -322,7 +372,7 @@ public class InterfaceCentrale extends JFrame {
 				counter++ ;
 				if(counter==1){
 					textPane_4.setVisible(true);
-					textPane_9.setVisible(true);
+					txtpnScxc.setVisible(true);
 				}
 				if(counter==2){
 					textPane_5.setVisible(true);
@@ -335,8 +385,14 @@ public class InterfaceCentrale extends JFrame {
 				if(counter==4){
 					textPane_3.setVisible(true);
 					textPane_8.setVisible(true);
-					counter = 0 ;
+					
 				}
+				
+				if(counter>4){
+					counter=4;
+					
+				}
+				
 				
 				
 				System.out.println(""+counter);
@@ -378,9 +434,10 @@ public class InterfaceCentrale extends JFrame {
 		panel_1.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 8, 0));
 		
-		textPane_9 = new JTextPane();
-		textPane_9.setVisible(false);
-		panel_3.add(textPane_9);
+		txtpnScxc = new JTextPane();
+		txtpnScxc.setToolTipText("");
+		txtpnScxc.setVisible(false);
+		panel_3.add(txtpnScxc);
 		
 		textPane_10 = new JTextPane();
 		textPane_10.setVisible(false);
@@ -398,8 +455,8 @@ public class InterfaceCentrale extends JFrame {
 		textPane_2.setBounds(139, 46, 81, 111);
 		panel_1.add(textPane_2);
 		
-		JTextPane textPane_7 = new JTextPane();
-		textPane_7.setBounds(139, 166, 84, 23);
+		textPane_7 = new JTextPane();
+		textPane_7.setBounds(139, 167, 84, 21);
 		panel_1.add(textPane_7);
 		
 		JButton button_1 = new JButton("-");
@@ -408,23 +465,35 @@ public class InterfaceCentrale extends JFrame {
 				
 				Toolkit.getDefaultToolkit().beep();
 				decounter++ ;
-				if(decounter==1){
+				if(counter==1){
 					textPane_4.setVisible(false);
-					textPane_9.setVisible(false);
+					textPane_4.setText("");
+					txtpnScxc.setVisible(false);
+					txtpnScxc.setText("");
+					
 					counter = 0  ;
+
 				}
-				if(decounter==2){
+				if(counter==2){
 					textPane_5.setVisible(false);
 					textPane_10.setVisible(false);
+					textPane_5.setText("");
+					textPane_10.setText("");
+					counter = 1 ;
 				}
-				if(decounter==3){
+				if(counter==3){
 					textPane_6.setVisible(false);
 					textPane_11.setVisible(false);
+					textPane_6.setText("");
+					textPane_11.setText("");
+					counter = 2 ;
 				}
-				if(decounter==4){
+				if(counter==4){
 					textPane_3.setVisible(false);
 					textPane_8.setVisible(false);
-					decounter = 0 ;
+					textPane_3.setText("");
+					textPane_8.setText("");
+					counter = 3 ;
 				}
 				
 			}
@@ -433,10 +502,23 @@ public class InterfaceCentrale extends JFrame {
 		button_1.setBounds(317, 223, 46, 23);
 		panel_1.add(button_1);
 		
-		JPanel panel_menu = new JPanel();
-		panel_menu.setBounds(10, 11, 149, 554);
-		contentPane.add(panel_menu);
-		panel_menu.setLayout(null);
+		lblDonneesY = new JLabel("Donnees Y");
+		lblDonneesY.setBounds(230, 21, 62, 14);
+		panel_1.add(lblDonneesY);
+		
+		lblDonneesY_1 = new JLabel("Donnees Y");
+		lblDonneesY_1.setBounds(317, 21, 62, 14);
+		panel_1.add(lblDonneesY_1);
+		
+		lblDonneesY_2 = new JLabel("Donnees Y");
+		lblDonneesY_2.setBounds(408, 21, 62, 14);
+		panel_1.add(lblDonneesY_2);
+		
+		lblDonneesY_3 = new JLabel("Donnees Y");
+		lblDonneesY_3.setBounds(497, 21, 62, 14);
+		panel_1.add(lblDonneesY_3);
+		
+		
 
 		// tabDonneeX = new ArrayList<>() ;
 
@@ -455,11 +537,191 @@ public class InterfaceCentrale extends JFrame {
 	public ArrayList<Double> createDonneY() {
 		ArrayList<Double> tabDonneeY = new ArrayList<>();
 
-		String[] a = textPane_1.getText().split("\n");
+		String[] a = textPane_2.getText().split("\n");
 		for (int i = 0; i < a.length; i++) {
 			tabDonneeY.add(new Double(a[i]));
 		}
 		return tabDonneeY;
 
 	}
+	 
+	public ArrayList<Double> createDonneY_1() {
+		ArrayList<Double> tabDonneeY1 = new ArrayList<>();
+
+		String[] a = textPane_4.getText().split("\n");
+		for (int i = 0; i < a.length; i++) {
+			tabDonneeY1.add(new Double(a[i]));
+		}
+		return tabDonneeY1;
+
+	}
+	
+	public ArrayList<Double> createDonneY_2() {
+		ArrayList<Double> tabDonneeY2 = new ArrayList<>();
+
+		String[] a = textPane_5.getText().split("\n");
+		for (int i = 0; i < a.length; i++) {
+			tabDonneeY2.add(new Double(a[i]));
+		}
+		return tabDonneeY2;
+
+	}
+	
+	public ArrayList<Double> createDonneY_3() {
+		ArrayList<Double> tabDonneeY3 = new ArrayList<>();
+
+		String[] a = textPane_6.getText().split("\n");
+		for (int i = 0; i < a.length; i++) {
+			tabDonneeY3.add(new Double(a[i]));
+		}
+		return tabDonneeY3;
+
+	}
+	
+	public ArrayList<Double> createDonneY_4() {
+		ArrayList<Double> tabDonneeY4 = new ArrayList<>();
+
+		String[] a = textPane_3.getText().split("\n");
+		for (int i = 0; i < a.length; i++) {
+			tabDonneeY4.add(new Double(a[i]));
+		}
+		return tabDonneeY4;
+
+	}
+	
+	public ArrayList<String> tabGroupe(){
+		ArrayList<String> groupe = new ArrayList<>() ;
+		groupe.add(textPane_7.getText());
+		groupe.add(txtpnScxc.getText());
+		groupe.add(textPane_10.getText());
+		groupe.add(textPane_11.getText());
+		groupe.add(textPane_8.getText());
+		
+		return groupe ;
+	}
+	
+	public DefaultCategoryDataset createBarDataset(int nb){
+		ArrayList<String> nom = createDonneX() ;
+		ArrayList<Double> y0 = createDonneY() ;
+
+
+		
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset() ;
+		if(nb==0){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(createDonneY().get(i), nom.get(i),textPane_7.getText());
+				
+			}
+		}
+		if(nb==1){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+			}
+		}
+		
+		if(nb==2){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+			}
+		}
+		
+		if(nb==3){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
+			}
+		}
+		
+		if(nb==4){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
+				dataset.addValue(createDonneY_4().get(i), nom.get(i), textPane_8.getText());
+			}
+		}
+		
+		return dataset;
+		
+	}
+	
+	
+	
+	public CategoryDataset createAreaDataset(int nb){
+		ArrayList<String> nom = createDonneX() ;
+		ArrayList<Double> y0 = createDonneY() ;
+
+
+		
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset() ;
+		if(nb==0){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(createDonneY().get(i), nom.get(i),textPane_7.getText());
+				
+			}
+		}
+		if(nb==1){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+			}
+		}
+		
+		if(nb==2){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+			}
+		}
+		
+		if(nb==3){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
+			}
+		}
+		
+		if(nb==4){
+			for(int i = 0 ; i<nom.size(); i++){
+				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
+				dataset.addValue(createDonneY_4().get(i), nom.get(i), textPane_8.getText());
+			}
+		}
+		
+		return dataset;
+		
+	}
+
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

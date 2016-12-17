@@ -207,13 +207,13 @@ public class BarChart_1 extends JFrame {
 
 				JFreeChart chart = null;
 
-				chart = createBarChart1(createBarGroupe(textField.getText(),createTabNom1(),createTabValeur1()));
-
-				ChartPanel frame = new ChartPanel(chart);
-				frame.setBounds(10, 11, 691, 500);
-				//frame.setVisible(true);
-
-				panel.add(frame);
+//				chart = createBarChart1(createBarGroupe(textField.getText(),createTabNom1(),createTabValeur1()));
+//
+//				ChartPanel frame = new ChartPanel(chart);
+//				frame.setBounds(10, 11, 691, 500);
+//				//frame.setVisible(true);
+//
+//				panel.add(frame);
 				panel.repaint();
 
 			}
@@ -233,6 +233,8 @@ public class BarChart_1 extends JFrame {
 
 		tabValeur = new ArrayList<>();
 		nom = new ArrayList<>();
+		
+		
 	}
 
 	public ArrayList<Double> createTabValeur1() {
@@ -264,16 +266,15 @@ public class BarChart_1 extends JFrame {
 		return b;
 	}
 
-	public DefaultCategoryDataset createBarGroupe(String nomGroupe,ArrayList<String> nom,ArrayList<Double> valeur) {
+	public DefaultCategoryDataset createBarGroupe(ArrayList<String> nomGroupe,ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		ArrayList<Double> a = createTabValeur1();
-		ArrayList<String> b = createTabNom1();
+		
 
 		for (int i = 0; i < nom.size(); i++) {
-			dataset.setValue(a.get(i), b.get(i), nomGroupe);
+			
+			dataset.setValue(valeur.get(i), nom.get(i), nomGroupe.get(i));
+			
 		}
-
-		
 
 		
 		return dataset;

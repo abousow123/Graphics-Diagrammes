@@ -17,7 +17,9 @@ import javax.swing.border.BevelBorder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.event.ActionListener;
@@ -197,5 +199,73 @@ public class Area2 extends JFrame {
 		
 		return chart ;
 	}
+	
+	public JFreeChart createAreaSerieChart(String titre,String axeX,String axeY,CategoryDataset dataset,boolean legende) {
+		JFreeChart chart = null ;
+		
+		if(legende==true){
+		        chart = ChartFactory.createStackedAreaChart(
+		        		titre, // chart title
+		        		axeX, // domain axis label
+		        		axeY, // range axis label
+		        		dataset, // data
+		        		PlotOrientation.VERTICAL, // orientation
+		        		true, // include legend
+		        		true, // tooltips
+		        		false // urls
+		        		);
+		        
+		}
+		else {
+			chart =ChartFactory.createStackedAreaChart(
+					titre, // chart title
+	        		axeX, // domain axis label
+	        		axeY, // range axis label
+					dataset, // data
+					PlotOrientation.VERTICAL, // orientation
+					false, // include legend
+					true, // tooltips
+					false // urls
+					);
+		}
+		
+		
+		return chart ;
+	}
+	
+	public JFreeChart createAreaSerieChart3D(String titre,String axeX,String axeY,CategoryDataset dataset,boolean legende) {
+		JFreeChart chart = null ;
+		
+		if(legende==true){
+		        chart = ChartFactory.createStackedAreaChart(
+		        		titre, // chart title
+		        		axeX, // domain axis label
+		        		axeY, // range axis label
+		        		dataset, // data
+		        		PlotOrientation.VERTICAL, // orientation
+		        		true, // include legend
+		        		true, // tooltips
+		        		false // urls
+		        		);
+		        
+		}
+		else {
+			chart =ChartFactory.createStackedAreaChart(
+					titre, // chart title
+	        		axeX, // domain axis label
+	        		axeY, // range axis label
+					dataset, // data
+					PlotOrientation.VERTICAL, // orientation
+					false, // include legend
+					true, // tooltips
+					false // urls
+					);
+		}
+		
+		CategoryPlot plot = chart.getCategoryPlot();
+		plot.setForegroundAlpha(0.5f);
+		return chart ;
+	}
+
 
 }
