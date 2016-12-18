@@ -202,11 +202,11 @@ public class LineChartXY extends JFrame {
 					panel_1.setVisible(true);
 					layeredPane.setLayer(panel_1, 0, 0);
 					panel_2.setVisible(false);
-					JFreeChart chart = createFreechartLine(createDatasetLine());
-					ChartPanel pan = new ChartPanel(chart);
-					pan.setBounds(10, 11, 717, 450);
-
-					panel_1.add(pan);
+//					JFreeChart chart = createFreechartLine(createDatasetLine());
+//					ChartPanel pan = new ChartPanel(chart);
+//					pan.setBounds(10, 11, 717, 450);
+//
+//					panel_1.add(pan);
 					panel_1.repaint();
 				}
 				
@@ -279,9 +279,16 @@ public class LineChartXY extends JFrame {
 		return dataset;
 	}
 
-	public JFreeChart createFreechartLine(XYDataset dataset) {
-		JFreeChart chart = ChartFactory.createXYLineChart(textField.getText(),
-				"X", "Y", dataset, PlotOrientation.VERTICAL, true, true, false);
+	public JFreeChart createFreechartLine(String titre,String axeX,String axeY,XYDataset dataset,boolean legende) {
+		JFreeChart chart = null ;
+		
+		if(legende==true){
+		chart = ChartFactory.createXYLineChart(titre,
+				axeX, axeY, dataset, PlotOrientation.VERTICAL, true, true, false);
+		}else {
+			chart = ChartFactory.createXYLineChart(titre,
+					axeX, axeY, dataset, PlotOrientation.VERTICAL,false, true, false);
+		}
 
 		XYPlot plot = (XYPlot) chart.getXYPlot();
 		plot.setBackgroundPaint(Color.LIGHT_GRAY);
