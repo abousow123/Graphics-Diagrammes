@@ -450,11 +450,19 @@ public class BarChart extends JFrame {
 			DefaultCategoryDataset dataset,boolean legende) {
 		JFreeChart chart = null;
 
+		if(legende==true){
 		chart = ChartFactory.createWaterfallChart(textField.getText(),
 				textField_1.getText(), textField_10.getText(), dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);
+		}else {
+			chart = ChartFactory.createWaterfallChart(textField.getText(),
+					textField_1.getText(), textField_10.getText(), dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+			CategoryPlot plot = chart.getCategoryPlot();
+			plot.setRangeGridlinePaint(java.awt.Color.black);
+		}
 
 		return chart;
 	}

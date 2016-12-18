@@ -36,6 +36,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JTable;
+import javax.swing.JLayeredPane;
 
 public class InterfaceCentrale extends JFrame {
 
@@ -43,41 +44,41 @@ public class InterfaceCentrale extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	
-	JLabel lblDonnesX ;
+
+	JLabel lblDonnesX;
 
 	JTextPane textPane;
-	JTextPane textPane_1 ;
-	JTextPane textPane_2 ;
-	JTextPane textPane_6 ;
-	JTextPane textPane_4 ;
-	JTextPane textPane_5 ;
-	JTextPane textPane_3 ;
-	JTextPane txtpnScxc ;
-	JTextPane textPane_10 ;
-	JTextPane textPane_11 ;
-	JTextPane textPane_8 ;
-	JTextPane textPane_7 ;
+	JTextPane textPane_1;
+	JTextPane textPane_2;
+	JTextPane textPane_6;
+	JTextPane textPane_4;
+	JTextPane textPane_5;
+	JTextPane textPane_3;
+	JTextPane txtpnScxc;
+	JTextPane textPane_10;
+	JTextPane textPane_11;
+	JTextPane textPane_8;
+	JTextPane textPane_7;
 
 	JComboBox comboBox;
 
-	String[] typeGraphe = { "Barres","Serie de barres", "Linèaire", "Circulaire", "Surface","Serie de Surfaces"};
+	String[] typeGraphe = { "Barres", "Serie de barres", "Linèaire",
+			"Circulaire", "Surface", "Serie de Surfaces" };
 	private JTextField textField_4;
-	
-	JCheckBox chckbxEnd ;
-	JCheckBox chckbxLegende ;
-	JCheckBox chckbxWaterfa ;
-	
-	JLabel lblDonnesY ;
-	JLabel lblDonneesY ;
-	JLabel lblDonneesY_1 ;
-	JLabel lblDonneesY_2 ;
-	JLabel lblDonneesY_3 ;
-	
-	  static int  counter = 0 ;
-	  int decounter = 0 ;
-	  private JTable table;
 
+	JCheckBox chckbxEnd;
+	JCheckBox chckbxLegende;
+	JCheckBox chckbxWaterfa;
+
+	JLabel lblDonnesY;
+	JLabel lblDonneesY;
+	JLabel lblDonneesY_1;
+	JLabel lblDonneesY_2;
+	JLabel lblDonneesY_3;
+
+	static int counter = 0;
+	int decounter = 0;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -87,13 +88,13 @@ public class InterfaceCentrale extends JFrame {
 				try {
 					InterfaceCentrale frame = new InterfaceCentrale();
 					frame.setVisible(true);
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		
+
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class InterfaceCentrale extends JFrame {
 	 */
 	public InterfaceCentrale() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 845, 614);
+		setBounds(100, 100, 1121, 714);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -113,20 +114,20 @@ public class InterfaceCentrale extends JFrame {
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0,
 						255)));
 		panel.setToolTipText("");
-		panel.setBounds(10, 11, 663, 252);
+		panel.setBounds(259, 92, 705, 252);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		counter = 0 ;
-         System.out.println(counter);
+
+		counter = 0;
+		System.out.println(counter);
 		comboBox = new JComboBox(typeGraphe);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBox.getSelectedItem().toString()
 						.equalsIgnoreCase(typeGraphe[1])) {
-					//lblDonnesX.setText("");
-					//chckbxEnd.setVisible(false);
-					//textField.setVisible(false);
+					// lblDonnesX.setText("");
+					// chckbxEnd.setVisible(false);
+					// textField.setVisible(false);
 				}
 			}
 		});
@@ -183,19 +184,24 @@ public class InterfaceCentrale extends JFrame {
 		textField_4 = new JTextField();
 		textField_4.setBounds(247, 134, 86, 20);
 		panel.add(textField_4);
-		textField_4.setColumns(10); 
-		
+		textField_4.setColumns(10);
+
 		chckbxWaterfa = new JCheckBox("Waterfall");
 		chckbxWaterfa.setBounds(349, 183, 97, 23);
 		panel.add(chckbxWaterfa);
+		GridLayout g1 = new GridLayout();
+
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(259, 360, 705, 286);
+		contentPane.add(layeredPane);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 11, 699, 272);
+		layeredPane.add(panel_1);
 		panel_1.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Donnees graphique",
 				TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(10, 268, 663, 297);
-		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
 		textPane = new JTextPane();
@@ -215,50 +221,286 @@ public class InterfaceCentrale extends JFrame {
 		panel_1.add(lblGroupe);
 
 		JButton btnNewButton = new JButton("valider");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[3])) {
-					JFreeChart chart = null;
+		btnNewButton.setBounds(105, 219, 115, 37);
+		panel_1.add(btnNewButton);
 
-					if (chckbxEnd.isSelected()) {
-						PieChart pie = new PieChart();
-						PieDataset dataset = pie.createPieDataset(
-								createDonneX(), createDonneY());
-						chart = pie.createChart3D(textField.getText(), dataset,chckbxLegende.isSelected());
-						ChartFrame frame = new ChartFrame(textField.getText(),
-								chart);
-						frame.setBounds(100, 100, 709, 614);
-						frame.setVisible(true);
-					}
+		JButton button = new JButton("+");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		button.setBounds(261, 223, 46, 23);
+		panel_1.add(button);
 
-					else {
-						PieChart pie = new PieChart();
-						PieDataset dataset = pie.createPieDataset(
-								createDonneX(), createDonneY());
-						chart = pie.createPieChart(textField.getText(), dataset,chckbxLegende.isSelected());
-						ChartFrame frame = new ChartFrame(textField.getText(),
-								chart);
-						frame.setBounds(100, 100, 709, 614);
-						frame.setVisible(true);
-					}
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.LIGHT_GRAY);
+		panel_2.setBounds(230, 46, 344, 111);
+		panel_1.add(panel_2);
+		GridLayout gl_panel_2 = new GridLayout(1, 4);
+		gl_panel_2.setHgap(8);
+		panel_2.setLayout(gl_panel_2);
 
+		textPane_4 = new JTextPane();
+		textPane_4.setVisible(false);
+		panel_2.add(textPane_4);
+
+		textPane_5 = new JTextPane();
+		textPane_5.setVisible(false);
+		panel_2.add(textPane_5);
+
+		textPane_6 = new JTextPane();
+		textPane_6.setVisible(false);
+		panel_2.add(textPane_6);
+
+		textPane_3 = new JTextPane();
+		textPane_3.setVisible(false);
+		panel_2.add(textPane_3);
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.LIGHT_GRAY);
+		panel_3.setBounds(230, 166, 344, 23);
+		panel_1.add(panel_3);
+		panel_3.setLayout(new GridLayout(1, 0, 8, 0));
+
+		txtpnScxc = new JTextPane();
+		txtpnScxc.setToolTipText("");
+		txtpnScxc.setVisible(false);
+		panel_3.add(txtpnScxc);
+
+		textPane_10 = new JTextPane();
+		textPane_10.setVisible(false);
+		panel_3.add(textPane_10);
+
+		textPane_11 = new JTextPane();
+		textPane_11.setVisible(false);
+		panel_3.add(textPane_11);
+
+		textPane_8 = new JTextPane();
+		textPane_8.setVisible(false);
+		panel_3.add(textPane_8);
+
+		textPane_2 = new JTextPane();
+		textPane_2.setBounds(139, 46, 81, 111);
+		panel_1.add(textPane_2);
+
+		textPane_7 = new JTextPane();
+		textPane_7.setBounds(139, 167, 84, 21);
+		panel_1.add(textPane_7);
+
+		JButton button_1 = new JButton("-");
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		button_1.setBounds(317, 223, 46, 23);
+		panel_1.add(button_1);
+
+		lblDonneesY = new JLabel("Donnees Y");
+		lblDonneesY.setBounds(230, 21, 62, 14);
+		panel_1.add(lblDonneesY);
+
+		lblDonneesY_1 = new JLabel("Donnees Y");
+		lblDonneesY_1.setBounds(317, 21, 62, 14);
+		panel_1.add(lblDonneesY_1);
+
+		lblDonneesY_2 = new JLabel("Donnees Y");
+		lblDonneesY_2.setBounds(408, 21, 62, 14);
+		panel_1.add(lblDonneesY_2);
+
+		lblDonneesY_3 = new JLabel("Donnees Y");
+		lblDonneesY_3.setBounds(497, 21, 62, 14);
+		panel_1.add(lblDonneesY_3);
+
+		JTextPane textPane_9 = new JTextPane();
+		textPane_9.setBounds(10, 46, 105, 111);
+		panel_1.add(textPane_9);
+
+		JTextPane textPane_12 = new JTextPane();
+		textPane_12.setBounds(139, 46, 81, 111);
+		panel_1.add(textPane_12);
+
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.LIGHT_GRAY);
+		panel_4.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Donn\u00E9es Graphiques", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		panel_4.setBounds(0, 11, 699, 272);
+		layeredPane.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JLabel lblX_1 = new JLabel("X");
+		lblX_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblX_1.setBounds(167, 25, 20, 14);
+		panel_4.add(lblX_1);
+		
+		JTextPane textPane_13 = new JTextPane();
+		textPane_13.setBounds(151, 49, 46, 96);
+		panel_4.add(textPane_13);
+		
+		JTextPane textPane_14 = new JTextPane();
+		textPane_14.setBounds(207, 49, 46, 96);
+		panel_4.add(textPane_14);
+		
+		JLabel lblY = new JLabel("Y");
+		lblY.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblY.setBounds(224, 25, 20, 14);
+		panel_4.add(lblY);
+		
+		JLabel lblNo = new JLabel("Nom :");
+		lblNo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNo.setBounds(22, 156, 68, 14);
+		panel_4.add(lblNo);
+		
+		JTextPane textPane_15 = new JTextPane();
+		textPane_15.setBounds(148, 156, 105, 20);
+		panel_4.add(textPane_15);
+		
+		JTextPane textPane_16 = new JTextPane();
+		textPane_16.setBounds(299, 49, 46, 96);
+		panel_4.add(textPane_16);
+		
+		JTextPane textPane_17 = new JTextPane();
+		textPane_17.setBounds(355, 49, 46, 96);
+		panel_4.add(textPane_17);
+		
+		JTextPane textPane_18 = new JTextPane();
+		textPane_18.setBounds(446, 50, 46, 95);
+		panel_4.add(textPane_18);
+		
+		JTextPane textPane_19 = new JTextPane();
+		textPane_19.setBounds(502, 49, 46, 96);
+		panel_4.add(textPane_19);
+		
+		JTextPane textPane_20 = new JTextPane();
+		textPane_20.setBounds(587, 49, 46, 96);
+		panel_4.add(textPane_20);
+		
+		JTextPane textPane_21 = new JTextPane();
+		textPane_21.setBounds(643, 49, 46, 96);
+		panel_4.add(textPane_21);
+		
+		JTextPane textPane_22 = new JTextPane();
+		textPane_22.setBounds(299, 156, 102, 20);
+		panel_4.add(textPane_22);
+		
+		JTextPane textPane_23 = new JTextPane();
+		textPane_23.setBounds(446, 156, 102, 20);
+		panel_4.add(textPane_23);
+		
+		JTextPane textPane_24 = new JTextPane();
+		textPane_24.setBounds(587, 156, 102, 20);
+		panel_4.add(textPane_24);
+		
+		JLabel lblCoordonnes = new JLabel("Coordonn\u00E9es:");
+		lblCoordonnes.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCoordonnes.setBounds(10, 27, 105, 14);
+		panel_4.add(lblCoordonnes);
+		
+		JLabel lblX = new JLabel("X");
+		lblX.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblX.setBounds(316, 25, 20, 14);
+		panel_4.add(lblX);
+		
+		JLabel lblY_1 = new JLabel("Y");
+		lblY_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblY_1.setBounds(371, 25, 30, 14);
+		panel_4.add(lblY_1);
+		
+		JLabel lblX_2 = new JLabel("X");
+		lblX_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblX_2.setBounds(462, 25, 20, 14);
+		panel_4.add(lblX_2);
+		
+		JLabel lblY_2 = new JLabel("Y");
+		lblY_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblY_2.setBounds(517, 25, 20, 14);
+		panel_4.add(lblY_2);
+		
+		JLabel lblX_3 = new JLabel("X");
+		lblX_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblX_3.setBounds(599, 25, 20, 14);
+		panel_4.add(lblX_3);
+		
+		JLabel lblY_3 = new JLabel("Y");
+		lblY_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblY_3.setBounds(658, 25, 20, 14);
+		panel_4.add(lblY_3);
+		
+		JButton btnValider = new JButton("Valider");
+		btnValider.setBounds(247, 253, 89, 23);
+		panel_4.add(btnValider);
+		
+		JButton button_2 = new JButton("+");
+		button_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		button_2.setBounds(373, 211, 46, 23);
+		panel_4.add(button_2);
+		
+		JButton button_3 = new JButton("-");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		button_3.setBounds(429, 211, 52, 23);
+		panel_4.add(button_3);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(10, 92, 249, 554);
+		contentPane.add(panel_5);
+
+		// tabDonneeX = new ArrayList<>() ;
+
+	}
+
+	public class Valide1 implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[3])) {
+				JFreeChart chart = null;
+
+				if (chckbxEnd.isSelected()) {
+					PieChart pie = new PieChart();
+					PieDataset dataset = pie.createPieDataset(createDonneX(),
+							createDonneY());
+					chart = pie.createChart3D(textField.getText(), dataset,
+							chckbxLegende.isSelected());
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
 				}
 
-				// BarChart
-
-				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[0])) {
-					JFreeChart chart = null;
-					BarChart bar = new BarChart();
-					DefaultCategoryDataset dataset = bar.createBarDataset(
-							textField_1.getText(), createDonneX(),
+				else {
+					PieChart pie = new PieChart();
+					PieDataset dataset = pie.createPieDataset(createDonneX(),
 							createDonneY());
+					chart = pie.createPieChart(textField.getText(), dataset,
+							chckbxLegende.isSelected());
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+				}
+
+			}
+
+			// BarChart
+
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[0])) {
+				JFreeChart chart = null;
+				BarChart bar = new BarChart();
+				DefaultCategoryDataset dataset = bar.createBarDataset(
+						textField_1.getText(), createDonneX(), createDonneY());
+				if (chckbxWaterfa.isSelected()) {
+					chart = bar.creteFreeChartWaterfall(textField.getText(),
+							textField_1.getText(), textField_2.getText(),
+							dataset, chckbxLegende.isSelected());
+
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+				} else {
 					if (chckbxEnd.isSelected()) {
 
 						chart = bar.creteFreeChart3D(textField.getText(),
 								textField_1.getText(), textField_2.getText(),
-								dataset,chckbxLegende.isSelected());
+								dataset, chckbxLegende.isSelected());
 
 						ChartFrame frame = new ChartFrame(textField.getText(),
 								chart);
@@ -270,260 +512,180 @@ public class InterfaceCentrale extends JFrame {
 
 						chart = bar.creteFreeChart(textField.getText(),
 								textField_1.getText(), textField_2.getText(),
-								dataset,chckbxLegende.isSelected());
+								dataset, chckbxLegende.isSelected());
 
 						ChartFrame frame = new ChartFrame(textField.getText(),
 								chart);
 						frame.setBounds(100, 100, 709, 614);
 						frame.setVisible(true);
 					}
-
 				}
 
-				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[4])) {
-					JFreeChart chart = null;
-					
-					Area2 area = new Area2();
-					DefaultCategoryDataset dataset = area.createDataset(
-							textField_4.getText(), createDonneX(),
-							createDonneY());
-					chart = area.createChart(textField.getText(),
+			}
+
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[4])) {
+				JFreeChart chart = null;
+
+				Area2 area = new Area2();
+				DefaultCategoryDataset dataset = area.createDataset(
+						textField_4.getText(), createDonneX(), createDonneY());
+				chart = area.createChart(textField.getText(),
+						textField_1.getText(), textField_2.getText(), dataset,
+						chckbxLegende.isSelected());
+				ChartFrame frame = new ChartFrame(textField.getText(), chart);
+				frame.setBounds(100, 100, 709, 614);
+				frame.setVisible(true);
+
+			}
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[2])) {
+				JFreeChart chart = null;
+				if (chckbxEnd.isSelected()) {
+					LineChartStraight line = new LineChartStraight();
+					CategoryDataset dataset = line.createLineDataset(
+							createDonneX(), createDonneY());
+					chart = line.createChartLine3D(textField.getText(),
 							textField_1.getText(), textField_2.getText(),
-							dataset,chckbxLegende.isSelected());
+							textField_4.getText(), dataset,
+							chckbxLegende.isSelected());
 					ChartFrame frame = new ChartFrame(textField.getText(),
 							chart);
 					frame.setBounds(100, 100, 709, 614);
 					frame.setVisible(true);
-					
-				}
-				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[2])) {
-					JFreeChart chart = null;
-					if (chckbxEnd.isSelected()){
-						LineChartStraight line = new LineChartStraight();
-						CategoryDataset dataset = line.createLineDataset(
-								createDonneX(), createDonneY());
-						chart = line.createChartLine3D(textField.getText(),
-								textField_1.getText(), textField_2.getText(),
-								textField_4.getText(), dataset,chckbxLegende.isSelected());
-						ChartFrame frame = new ChartFrame(textField.getText(),
-								chart);
-						frame.setBounds(100, 100, 709, 614);
-						frame.setVisible(true);
-					}
-					else{
+				} else {
 					LineChartStraight line = new LineChartStraight();
 					CategoryDataset dataset = line.createLineDataset(
 							createDonneX(), createDonneY());
 					chart = line.createChartLine(textField.getText(),
 							textField_1.getText(), textField_2.getText(),
-							textField_4.getText(), dataset,chckbxLegende.isSelected());
+							textField_4.getText(), dataset,
+							chckbxLegende.isSelected());
 					ChartFrame frame = new ChartFrame(textField.getText(),
 							chart);
 					frame.setBounds(100, 100, 709, 614);
 					frame.setVisible(true);
-					}
-				}
-				
-				if(comboBox.getSelectedItem().toString().equalsIgnoreCase(typeGraphe[1])){
-					JFreeChart chart = null;
-					BarChart_1 b = new BarChart_1() ;
-					DefaultCategoryDataset dataset = createBarDataset(counter) ;
-					chart = b.createBarChart1(dataset) ;
-					ChartFrame frame = new ChartFrame(textField.getText(),
-							chart);
-					frame.setBounds(100, 100, 709, 614);
-					frame.setVisible(true);
-					
-				}
-				
-				if (comboBox.getSelectedItem().toString()
-						.equalsIgnoreCase(typeGraphe[5])){
-					JFreeChart chart = null;
-					Area2 b = new Area2() ;
-					if (chckbxEnd.isSelected()){
-					CategoryDataset dataset = createAreaDataset(counter) ;
-					chart = b.createAreaSerieChart3D(textField.getText(), textField_1.getText(), textField_2.getText(),
-							 dataset,chckbxLegende.isSelected()) ;
-					ChartFrame frame = new ChartFrame(textField.getText(),
-							chart);
-					frame.setBounds(100, 100, 709, 614);
-					frame.setVisible(true);
-					}else {
-						CategoryDataset dataset = createAreaDataset(counter) ;
-						chart = b.createAreaSerieChart(textField.getText(), textField_1.getText(), textField_2.getText(),
-								 dataset,chckbxLegende.isSelected()) ;
-						ChartFrame frame = new ChartFrame(textField.getText(),
-								chart);
-						frame.setBounds(100, 100, 709, 614);
-						frame.setVisible(true);
-					}
 				}
 			}
-		});
-		btnNewButton.setBounds(105, 219, 115, 37);
-		panel_1.add(btnNewButton);
-		
-		JButton button = new JButton("+");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Toolkit.getDefaultToolkit().beep();
-				counter++ ;
-				if(counter==1){
-					textPane_4.setVisible(true);
-					txtpnScxc.setVisible(true);
-				}
-				if(counter==2){
-					textPane_5.setVisible(true);
-					textPane_10.setVisible(true);
-				}
-				if(counter==3){
-					textPane_6.setVisible(true);
-					textPane_11.setVisible(true);
-				}
-				if(counter==4){
-					textPane_3.setVisible(true);
-					textPane_8.setVisible(true);
-					
-				}
-				
-				if(counter>4){
-					counter=4;
-					
-				}
-				
-				
-				
-				System.out.println(""+counter);
-			}
-		});
-		button.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		button.setBounds(261, 223, 46, 23);
-		panel_1.add(button);
-		
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.LIGHT_GRAY);
-		panel_2.setBounds(230, 46, 344, 111);
-		panel_1.add(panel_2);
-		GridLayout g1 = new GridLayout() ;
-		GridLayout gl_panel_2 = new GridLayout(1,4);
-		gl_panel_2.setHgap(8);
-		panel_2.setLayout(gl_panel_2);
-		
-		textPane_4 = new JTextPane();
-		textPane_4.setVisible(false);
-		panel_2.add(textPane_4);
-		
-		textPane_5 = new JTextPane();
-		textPane_5.setVisible(false);
-		panel_2.add(textPane_5);
-		
-		textPane_6 = new JTextPane();
-		textPane_6.setVisible(false);
-		panel_2.add(textPane_6);
-		
-		textPane_3 = new JTextPane();
-		textPane_3.setVisible(false);
-		panel_2.add(textPane_3);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.LIGHT_GRAY);
-		panel_3.setBounds(230, 166, 344, 23);
-		panel_1.add(panel_3);
-		panel_3.setLayout(new GridLayout(1, 0, 8, 0));
-		
-		txtpnScxc = new JTextPane();
-		txtpnScxc.setToolTipText("");
-		txtpnScxc.setVisible(false);
-		panel_3.add(txtpnScxc);
-		
-		textPane_10 = new JTextPane();
-		textPane_10.setVisible(false);
-		panel_3.add(textPane_10);
-		
-		textPane_11 = new JTextPane();
-		textPane_11.setVisible(false);
-		panel_3.add(textPane_11);
-		
-		textPane_8 = new JTextPane();
-		textPane_8.setVisible(false);
-		panel_3.add(textPane_8);
-		
-		textPane_2 = new JTextPane();
-		textPane_2.setBounds(139, 46, 81, 111);
-		panel_1.add(textPane_2);
-		
-		textPane_7 = new JTextPane();
-		textPane_7.setBounds(139, 167, 84, 21);
-		panel_1.add(textPane_7);
-		
-		JButton button_1 = new JButton("-");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				Toolkit.getDefaultToolkit().beep();
-				decounter++ ;
-				if(counter==1){
-					textPane_4.setVisible(false);
-					textPane_4.setText("");
-					txtpnScxc.setVisible(false);
-					txtpnScxc.setText("");
-					
-					counter = 0  ;
 
-				}
-				if(counter==2){
-					textPane_5.setVisible(false);
-					textPane_10.setVisible(false);
-					textPane_5.setText("");
-					textPane_10.setText("");
-					counter = 1 ;
-				}
-				if(counter==3){
-					textPane_6.setVisible(false);
-					textPane_11.setVisible(false);
-					textPane_6.setText("");
-					textPane_11.setText("");
-					counter = 2 ;
-				}
-				if(counter==4){
-					textPane_3.setVisible(false);
-					textPane_8.setVisible(false);
-					textPane_3.setText("");
-					textPane_8.setText("");
-					counter = 3 ;
-				}
-				
-			}
-		});
-		button_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		button_1.setBounds(317, 223, 46, 23);
-		panel_1.add(button_1);
-		
-		lblDonneesY = new JLabel("Donnees Y");
-		lblDonneesY.setBounds(230, 21, 62, 14);
-		panel_1.add(lblDonneesY);
-		
-		lblDonneesY_1 = new JLabel("Donnees Y");
-		lblDonneesY_1.setBounds(317, 21, 62, 14);
-		panel_1.add(lblDonneesY_1);
-		
-		lblDonneesY_2 = new JLabel("Donnees Y");
-		lblDonneesY_2.setBounds(408, 21, 62, 14);
-		panel_1.add(lblDonneesY_2);
-		
-		lblDonneesY_3 = new JLabel("Donnees Y");
-		lblDonneesY_3.setBounds(497, 21, 62, 14);
-		panel_1.add(lblDonneesY_3);
-		
-		
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[1])) {
+				JFreeChart chart = null;
+				BarChart_1 b = new BarChart_1();
+				DefaultCategoryDataset dataset = createBarDataset(counter);
+				chart = b.createBarChart1(dataset);
+				ChartFrame frame = new ChartFrame(textField.getText(), chart);
+				frame.setBounds(100, 100, 709, 614);
+				frame.setVisible(true);
 
-		// tabDonneeX = new ArrayList<>() ;
+			}
+
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[5])) {
+				JFreeChart chart = null;
+				Area2 b = new Area2();
+				if (chckbxEnd.isSelected()) {
+					CategoryDataset dataset = createAreaDataset(counter);
+					chart = b.createAreaSerieChart3D(textField.getText(),
+							textField_1.getText(), textField_2.getText(),
+							dataset, chckbxLegende.isSelected());
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+				} else {
+					CategoryDataset dataset = createAreaDataset(counter);
+					chart = b.createAreaSerieChart(textField.getText(),
+							textField_1.getText(), textField_2.getText(),
+							dataset, chckbxLegende.isSelected());
+					ChartFrame frame = new ChartFrame(textField.getText(),
+							chart);
+					frame.setBounds(100, 100, 709, 614);
+					frame.setVisible(true);
+				}
+			}
+
+		}
 
 	}
+	
+	public class ButPlus1 implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Toolkit.getDefaultToolkit().beep();
+			counter++;
+			if (counter == 1) {
+				textPane_4.setVisible(true);
+				txtpnScxc.setVisible(true);
+			}
+			if (counter == 2) {
+				textPane_5.setVisible(true);
+				textPane_10.setVisible(true);
+			}
+			if (counter == 3) {
+				textPane_6.setVisible(true);
+				textPane_11.setVisible(true);
+			}
+			if (counter == 4) {
+				textPane_3.setVisible(true);
+				textPane_8.setVisible(true);
+
+			}
+
+			if (counter > 4) {
+				counter = 4;
+
+			}
+
+			System.out.println("" + counter);
+			
+		}
+		
+	}
+
+	public class ButMoins1 implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			Toolkit.getDefaultToolkit().beep();
+			decounter++;
+			if (counter == 1) {
+				textPane_4.setVisible(false);
+				textPane_4.setText("");
+				txtpnScxc.setVisible(false);
+				txtpnScxc.setText("");
+
+				counter = 0;
+
+			}
+			if (counter == 2) {
+				textPane_5.setVisible(false);
+				textPane_10.setVisible(false);
+				textPane_5.setText("");
+				textPane_10.setText("");
+				counter = 1;
+			}
+			if (counter == 3) {
+				textPane_6.setVisible(false);
+				textPane_11.setVisible(false);
+				textPane_6.setText("");
+				textPane_11.setText("");
+				counter = 2;
+			}
+			if (counter == 4) {
+				textPane_3.setVisible(false);
+				textPane_8.setVisible(false);
+				textPane_3.setText("");
+				textPane_8.setText("");
+				counter = 3;
+			}
+
+		}
+		
+	}
+	
 	public ArrayList<String> createDonneX() {
 		ArrayList<String> tabDonneeX = new ArrayList<>();
 		String[] a = textPane.getText().split("\n");
@@ -544,7 +706,7 @@ public class InterfaceCentrale extends JFrame {
 		return tabDonneeY;
 
 	}
-	 
+
 	public ArrayList<Double> createDonneY_1() {
 		ArrayList<Double> tabDonneeY1 = new ArrayList<>();
 
@@ -555,7 +717,7 @@ public class InterfaceCentrale extends JFrame {
 		return tabDonneeY1;
 
 	}
-	
+
 	public ArrayList<Double> createDonneY_2() {
 		ArrayList<Double> tabDonneeY2 = new ArrayList<>();
 
@@ -566,7 +728,7 @@ public class InterfaceCentrale extends JFrame {
 		return tabDonneeY2;
 
 	}
-	
+
 	public ArrayList<Double> createDonneY_3() {
 		ArrayList<Double> tabDonneeY3 = new ArrayList<>();
 
@@ -577,7 +739,7 @@ public class InterfaceCentrale extends JFrame {
 		return tabDonneeY3;
 
 	}
-	
+
 	public ArrayList<Double> createDonneY_4() {
 		ArrayList<Double> tabDonneeY4 = new ArrayList<>();
 
@@ -588,140 +750,135 @@ public class InterfaceCentrale extends JFrame {
 		return tabDonneeY4;
 
 	}
-	
-	public ArrayList<String> tabGroupe(){
-		ArrayList<String> groupe = new ArrayList<>() ;
+
+	public ArrayList<String> tabGroupe() {
+		ArrayList<String> groupe = new ArrayList<>();
 		groupe.add(textPane_7.getText());
 		groupe.add(txtpnScxc.getText());
 		groupe.add(textPane_10.getText());
 		groupe.add(textPane_11.getText());
 		groupe.add(textPane_8.getText());
-		
-		return groupe ;
+
+		return groupe;
 	}
-	
-	public DefaultCategoryDataset createBarDataset(int nb){
-		ArrayList<String> nom = createDonneX() ;
-		ArrayList<Double> y0 = createDonneY() ;
 
+	public DefaultCategoryDataset createBarDataset(int nb) {
+		ArrayList<String> nom = createDonneX();
+		ArrayList<Double> y0 = createDonneY();
 
-		
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset() ;
-		if(nb==0){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(createDonneY().get(i), nom.get(i),textPane_7.getText());
-				
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		if (nb == 0) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(createDonneY().get(i), nom.get(i),
+						textPane_7.getText());
+
 			}
 		}
-		if(nb==1){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+		if (nb == 1) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
 			}
 		}
-		
-		if(nb==2){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
-				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+
+		if (nb == 2) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i),
+						textPane_10.getText());
 			}
 		}
-		
-		if(nb==3){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
-				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
-				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
+
+		if (nb == 3) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i),
+						textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i),
+						textPane_11.getText());
 			}
 		}
-		
-		if(nb==4){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
-				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
-				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
-				dataset.addValue(createDonneY_4().get(i), nom.get(i), textPane_8.getText());
+
+		if (nb == 4) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i),
+						textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i),
+						textPane_11.getText());
+				dataset.addValue(createDonneY_4().get(i), nom.get(i),
+						textPane_8.getText());
 			}
 		}
-		
+
 		return dataset;
-		
+
 	}
-	
-	
-	
-	public CategoryDataset createAreaDataset(int nb){
-		ArrayList<String> nom = createDonneX() ;
-		ArrayList<Double> y0 = createDonneY() ;
 
+	public CategoryDataset createAreaDataset(int nb) {
+		ArrayList<String> nom = createDonneX();
+		ArrayList<Double> y0 = createDonneY();
 
-		
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset() ;
-		if(nb==0){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(createDonneY().get(i), nom.get(i),textPane_7.getText());
-				
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		if (nb == 0) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(createDonneY().get(i), nom.get(i),
+						textPane_7.getText());
+
 			}
 		}
-		if(nb==1){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
+		if (nb == 1) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
 			}
 		}
-		
-		if(nb==2){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
-				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
+
+		if (nb == 2) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i),
+						textPane_10.getText());
 			}
 		}
-		
-		if(nb==3){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
-				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
-				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
+
+		if (nb == 3) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i),
+						textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i),
+						textPane_11.getText());
 			}
 		}
-		
-		if(nb==4){
-			for(int i = 0 ; i<nom.size(); i++){
-				dataset.addValue(y0.get(i), nom.get(i),textPane_7.getText());
-				dataset.addValue(createDonneY_1().get(i), nom.get(i), txtpnScxc.getText());
-				dataset.addValue(createDonneY_2().get(i), nom.get(i), textPane_10.getText());
-				dataset.addValue(createDonneY_3().get(i), nom.get(i), textPane_11.getText());
-				dataset.addValue(createDonneY_4().get(i), nom.get(i), textPane_8.getText());
+
+		if (nb == 4) {
+			for (int i = 0; i < nom.size(); i++) {
+				dataset.addValue(y0.get(i), nom.get(i), textPane_7.getText());
+				dataset.addValue(createDonneY_1().get(i), nom.get(i),
+						txtpnScxc.getText());
+				dataset.addValue(createDonneY_2().get(i), nom.get(i),
+						textPane_10.getText());
+				dataset.addValue(createDonneY_3().get(i), nom.get(i),
+						textPane_11.getText());
+				dataset.addValue(createDonneY_4().get(i), nom.get(i),
+						textPane_8.getText());
 			}
 		}
-		
+
 		return dataset;
-		
-	}
 
-	
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

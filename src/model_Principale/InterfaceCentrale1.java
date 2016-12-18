@@ -10,13 +10,18 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import java.awt.CardLayout;
+import javax.swing.JButton;
 
 public class InterfaceCentrale1 extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JPanel panel_1;
+	private JPanel panel;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JLabel lblSdsds;
 
 	/**
 	 * Launch the application.
@@ -39,35 +44,27 @@ public class InterfaceCentrale1 extends JFrame {
 	 */
 	public InterfaceCentrale1() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 635, 418);
+		setBounds(100, 100, 799, 441);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][][][grow][][][][grow][grow]", "[][][]"));
+		contentPane.setLayout(new MigLayout("", "[grow][][grow][grow][grow][][][][grow][grow]", "[][][grow]"));
 		
-		JLabel lblNewLabel = new JLabel("First Name");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		contentPane.add(lblNewLabel, "cell 1 1");
+		panel = new JPanel();
+		contentPane.add(panel, "cell 0 2 4 1,alignx center,growy");
+		panel.setLayout(new MigLayout("", "[][]", "[][][][][]"));
 		
-		textField = new JTextField();
-		contentPane.add(textField, "cell 3 1,growx,aligny bottom");
-		textField.setColumns(10);
+		btnNewButton = new JButton("New button");
+		panel.add(btnNewButton, "cell 1 1");
 		
-		JLabel lblNewLabel_1 = new JLabel("Last Name");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		contentPane.add(lblNewLabel_1, "cell 5 1,alignx left,aligny top");
+		lblSdsds = new JLabel("sdsds");
+		panel.add(lblSdsds, "cell 1 3");
 		
-		textField_1 = new JTextField();
-		contentPane.add(textField_1, "cell 7 1,alignx left");
-		textField_1.setColumns(10);
+		btnNewButton_1 = new JButton("New button");
+		panel.add(btnNewButton_1, "cell 0 4 2 1,grow");
 		
-		JLabel lblNewLabel_2 = new JLabel("Adresse");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		contentPane.add(lblNewLabel_2, "cell 1 2");
-		
-		textField_2 = new JTextField();
-		contentPane.add(textField_2, "cell 3 2 5 1,growx");
-		textField_2.setColumns(10);
+		panel_1 = new JPanel();
+		contentPane.add(panel_1, "cell 0 2 8 1,grow");
+		panel_1.setLayout(new CardLayout(0, 0));
 	}
-
 }
