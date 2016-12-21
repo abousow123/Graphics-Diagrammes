@@ -21,6 +21,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.IntervalXYDataset;
 
 public class BarChart_1 extends JFrame {
 
@@ -299,6 +300,18 @@ public class BarChart_1 extends JFrame {
 
 		return chart;
 	}
+	
+	public JFreeChart createXYBarChart(IntervalXYDataset dataset) {
+		JFreeChart chart = null;
+
+		chart = ChartFactory.createXYBarChart(textField.getText(),
+				textField_1.getText(),false, textField_2.getText(), dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		
+
+		return chart;
+	}
+	
 
 	public JFreeChart createAriaChart1(DefaultCategoryDataset dataset) {
 
@@ -307,6 +320,5 @@ public class BarChart_1 extends JFrame {
 				PlotOrientation.VERTICAL, true, true, false);
 		
 		return chart ;
-
-	}
+}
 }

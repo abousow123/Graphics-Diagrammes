@@ -1,36 +1,32 @@
 package model_Principale;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
+
+import modelAreaChart.Area1;
+import model_Bar.BarChart;
 import model_Line.LineChartXY;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JLabel;
-
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
-import javax.swing.JFormattedTextField;
-import javax.swing.JEditorPane;
-import javax.swing.JTextArea;
-
-import java.awt.Color;
-
-import javax.swing.JComboBox;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.JCheckBox;
-
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.DefaultTableXYDataset;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -64,6 +60,7 @@ public class Panel_XY extends JPanel {
 	JComboBox comboBox;
 
 	JCheckBox chckbxNewCheckBox_1;
+	JCheckBox chckbxd ;
 
 	static int counter = 0;
 	int decounter = 0;
@@ -71,10 +68,7 @@ public class Panel_XY extends JPanel {
 	String[] typeGraphe = { "Barres", "Linèaire", "Surface", };
 
 	public Panel_XY() {
-		setLayout(new MigLayout(
-				"",
-				"[][grow][][][58.00,grow][][20px:60.00:90px,right][20px:60.00:90px,right][20px:36.00:90px][60.00,right][60.00,right][92.00px][60.00,right][60.00,right][36.00][60.00][60.00]",
-				"[][grow][34.00][30.00][44.00][117.00][17.00][23.00][22.00][][48.00,grow][50px:105.00,bottom][50px:48.00,bottom][24.00,bottom][][][][][]"));
+		setLayout(new MigLayout("", "[][grow][][][58.00,grow][][20px:60.00:90px,grow,right][20px:60.00:90px,grow,right][20px:36.00:90px][60.00,right][60.00,right][92.00px][60.00,right][60.00,right][36.00][60.00]", "[][grow][34.00][30.00][44.00][117.00][17.00][23.00][22.00][][48.00,grow][50px:105.00,bottom][50px:48.00,bottom][24.00,bottom][][][][][]"));
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED,
@@ -82,67 +76,64 @@ public class Panel_XY extends JPanel {
 				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0,
 						255)));
 		add(panel, "cell 0 1 16 7,grow");
-		panel.setLayout(new MigLayout(
-				"",
-				"[][77.00][grow][left][74.00][grow][][grow][][][][][][][][][][][][][][][][][]",
-				"[][][][][][][]"));
+		panel.setLayout(new MigLayout("", "[][77.00,left][50px:n:100px,left][75.00,grow][74.00][][100px:68.00:200px,grow][grow][][][][][][][][][][][][][]", "[][][][][][][]"));
 
 		counter = 0;
-
-		JLabel lblNewLabel_2 = new JLabel("Type Graphe");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		panel.add(lblNewLabel_2, "cell 4 1");
+		
+				JLabel lblNewLabel_2 = new JLabel("Type Graphe");
+				lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+				panel.add(lblNewLabel_2, "cell 3 1");
 
 		comboBox = new JComboBox(typeGraphe);
-		panel.add(comboBox, "cell 5 1,growx");
+		panel.add(comboBox, "cell 4 1 3 1,growx");
 
 		JLabel lblTitre = new JLabel("Titre :");
-		lblTitre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		panel.add(lblTitre, "cell 1 3 2 1,alignx center");
+		lblTitre.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel.add(lblTitre, "cell 1 3,alignx center,aligny center");
 
 		textField_7 = new JTextField();
-		panel.add(textField_7, "cell 3 3 2 1,growx");
+		panel.add(textField_7, "cell 2 3 2 1,growx");
 		textField_7.setColumns(10);
+		
+				chckbxd = new JCheckBox("3D");
+				panel.add(chckbxd, "cell 10 3,alignx left");
 
 		JLabel lblAxeX = new JLabel("Axe X");
+		lblAxeX.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel.add(lblAxeX, "cell 1 4,alignx center,aligny center");
 
 		textField_1 = new JTextField();
-		panel.add(textField_1, "cell 3 4,growx");
+		panel.add(textField_1, "cell 2 4,growx");
 		textField_1.setColumns(10);
-
-		JLabel lblAxeY = new JLabel("Axe Y");
-		panel.add(lblAxeY, "cell 4 4,alignx center");
-
-		textField_2 = new JTextField();
-		panel.add(textField_2, "cell 5 4,growx");
-		textField_2.setColumns(10);
-
-		JLabel lblSource = new JLabel("Source");
-		panel.add(lblSource, "cell 8 4,alignx trailing");
-
-		textField_3 = new JTextField();
-		panel.add(textField_3, "cell 9 4,growx");
-		textField_3.setColumns(10);
-
-		JCheckBox chckbxd = new JCheckBox("3D");
-		panel.add(chckbxd, "cell 3 6,alignx center");
-
-		chckbxNewCheckBox_1 = new JCheckBox("Legende");
-		panel.add(chckbxNewCheckBox_1, "cell 4 6");
-
-		JCheckBox chckbxAfficher = new JCheckBox("Afficher Valeur");
-		panel.add(chckbxAfficher, "cell 5 6");
+										
+												chckbxNewCheckBox_1 = new JCheckBox("Legende");
+												panel.add(chckbxNewCheckBox_1, "cell 10 4");
+								
+										JLabel lblAxeY = new JLabel("Axe Y");
+										lblAxeY.setFont(new Font("Tahoma", Font.BOLD, 11));
+										panel.add(lblAxeY, "cell 1 5,alignx center");
+								
+										textField_2 = new JTextField();
+										panel.add(textField_2, "cell 2 5,growx");
+										textField_2.setColumns(10);
+										
+												JCheckBox chckbxAfficher = new JCheckBox("Afficher Valeur");
+												panel.add(chckbxAfficher, "cell 10 5");
+								
+										JLabel lblSource = new JLabel("Source");
+										lblSource.setFont(new Font("Tahoma", Font.BOLD, 11));
+										panel.add(lblSource, "cell 1 6,alignx center");
+								
+										textField_3 = new JTextField();
+										panel.add(textField_3, "cell 2 6,growx");
+										textField_3.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED,
 				null, null, null, null), "DONNEES GRAPHIQUE",
 				TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLUE));
 		add(panel_1, "cell 0 10 16 6,grow");
-		panel_1.setLayout(new MigLayout(
-				"",
-				"[][][][][][][60.00][60.00][40.00][60.00][60.00][40.00][60][60][40][60][60][][][][]",
-				"[][][144.00][][][]"));
+		panel_1.setLayout(new MigLayout("", "[][][][][][][60.00,grow][60.00,grow][40.00][60.00,grow][60.00,grow][40.00][60,grow][60,grow][40][60,grow][60,grow][][][][]", "[][][144.00][][][]"));
 
 		JLabel lblCoordonnes = new JLabel("Coordonn\u00E9es:");
 		panel_1.add(lblCoordonnes, "cell 1 1");
@@ -352,15 +343,52 @@ public class Panel_XY extends JPanel {
 					.equalsIgnoreCase(typeGraphe[1])) {
 				JFreeChart chart = null;
 				LineChartXY xy = new LineChartXY();
-				XYDataset dataset = createDatasetLine(counter);
+				XYDataset dataset = createXYDataset(counter);
 				chart = xy.createFreechartLine(textField_7.getText(),
 						textField_1.getText(), textField_2.getText(), dataset,
 						chckbxNewCheckBox_1.isSelected());
 				ChartFrame frame = new ChartFrame(textField_7.getText(), chart);
-				frame.setBounds(100, 100, 709, 614);
+				frame.setBounds(100, 100, 610, 610);
 				frame.setVisible(true);
 			}
 
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[2])) {
+				JFreeChart chart = null;
+				Area1 area = new Area1() ;
+				TableXYDataset dataset = createTableXYDataset(counter) ;
+                 if(chckbxd.isSelected()){
+                	 chart = area.createAriaChart(textField_7.getText(),
+						textField_1.getText(), textField_2.getText(), dataset,
+						chckbxNewCheckBox_1.isSelected()) ;
+				ChartFrame frame = new ChartFrame(textField_7.getText(), chart);
+				frame.setBounds(100, 100, 610, 610);
+				frame.setVisible(true);
+                 }else {
+                	 chart = area.createStackedAreaChart(textField_7.getText(),
+     						textField_1.getText(), textField_2.getText(), dataset,
+     						chckbxNewCheckBox_1.isSelected()) ;
+     				ChartFrame frame = new ChartFrame(textField_7.getText(), chart);
+     				frame.setBounds(100, 100, 610, 610);
+     				frame.setVisible(true);
+				}
+			}
+			
+			if (comboBox.getSelectedItem().toString()
+					.equalsIgnoreCase(typeGraphe[0])) {
+				JFreeChart chart = null;
+				BarChart bar = new BarChart();
+				IntervalXYDataset dataset = createIntervalXYDataset(counter );
+                 if(chckbxd.isSelected()){
+                	 chart = bar.createXYBarChart(textField_7.getText(),
+						textField_1.getText(), textField_2.getText(), dataset,
+						chckbxNewCheckBox_1.isSelected()) ;
+				ChartFrame frame = new ChartFrame(textField_7.getText(), chart);
+				frame.setBounds(100, 100, 610, 610);
+				frame.setVisible(true);
+                 }
+
+		}
 		}
 
 	}
@@ -456,87 +484,248 @@ public class Panel_XY extends JPanel {
 	// XYDATASET
 	// ****************************************************
 
-	public XYDataset createDatasetLine(int nb) {
+	public XYDataset createXYDataset(int nb) {
 
-		
 		XYSeries serie1 = new XYSeries(textField.getText());
 		XYSeries serie2 = new XYSeries(textField_4.getText());
 		XYSeries serie3 = new XYSeries(textField_5.getText());
 		XYSeries serie4 = new XYSeries(textField_6.getText());
-		
 
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		if (nb == 0) {
-			
-			
+
 			for (int i = 0; i < createDonneX_1().size(); i++) {
 
 				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
 
 			}
 			dataset.addSeries(serie1);
+		} else if (nb == 1) {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+		} else if (nb == 2) {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+
+			for (int i = 0; i < createDonneX_3().size(); i++) {
+
+				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
+			}
+
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+			dataset.addSeries(serie3);
+		} else {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+
+			for (int i = 0; i < createDonneX_3().size(); i++) {
+
+				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
+			}
+
+			for (int i = 0; i < createDonneX_4().size(); i++) {
+
+				serie4.add(createDonneX_4().get(i), createDonneY_4().get(i));
+
+			}
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+			dataset.addSeries(serie3);
+			dataset.addSeries(serie4);
 		}
-		 else if(nb==1){
-			 for (int i = 0; i < createDonneX_1().size(); i++) {
-
-					serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
-
-				}
-			for (int i = 0; i < createDonneX_2().size(); i++) {
-				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
-
-			}
-			 dataset.addSeries(serie1);
-		     dataset.addSeries(serie2);
-		 }
-		 else if(nb==2){
-			 for (int i = 0; i < createDonneX_1().size(); i++) {
-
-					serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
-
-				}
-			for (int i = 0; i < createDonneX_2().size(); i++) {
-				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
-
-			}
-			
-			for (int i = 0; i < createDonneX_3().size(); i++) {
-
-				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
-			}
-			
-		 dataset.addSeries(serie1);
-		 dataset.addSeries(serie2);
-		 dataset.addSeries(serie3);
-		 }
-		 else {
-			 for (int i = 0; i < createDonneX_1().size(); i++) {
-
-					serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
-
-				}
-			for (int i = 0; i < createDonneX_2().size(); i++) {
-				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
-
-			}
-			
-			for (int i = 0; i < createDonneX_3().size(); i++) {
-
-				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
-			}
-			 
-			 for (int i = 0; i < createDonneX_4().size(); i++) {
-
-					serie4.add(createDonneX_4().get(i), createDonneY_4().get(i));
-
-				}
-		 dataset.addSeries(serie1);
-		 dataset.addSeries(serie2);
-		 dataset.addSeries(serie3);
-		 dataset.addSeries(serie4);
-		 }
 
 		return dataset;
 	}
+
+	// ***********************************************************
+	// TableXYDataset
+	// ***********************************************************
+
+	private TableXYDataset createTableXYDataset(int nb) {
+		XYSeries serie1 = new XYSeries(textField.getText(),true, false);
+		XYSeries serie2 = new XYSeries(textField_4.getText(),true, false);
+		XYSeries serie3 = new XYSeries(textField_5.getText(),true, false);
+		XYSeries serie4 = new XYSeries(textField_6.getText(),true, false);
+
+		DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+
+		if (nb == 0) {
+
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			dataset.addSeries(serie1);
+		} else if (nb == 1) {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+		} else if (nb == 2) {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+
+			for (int i = 0; i < createDonneX_3().size(); i++) {
+
+				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
+			}
+
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+			dataset.addSeries(serie3);
+		} else {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+
+			for (int i = 0; i < createDonneX_3().size(); i++) {
+
+				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
+			}
+
+			for (int i = 0; i < createDonneX_4().size(); i++) {
+
+				serie4.add(createDonneX_4().get(i), createDonneY_4().get(i));
+
+			}
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+			dataset.addSeries(serie3);
+			dataset.addSeries(serie4);
+		}
+
+		return dataset;
+	}
+	
+	//***************************************************************
+	//IntervalXYDataset
+	//***************************************************************
+	private IntervalXYDataset createIntervalXYDataset(int nb) {
+        
+        
+        
+        XYSeries serie1 = new XYSeries(textField.getText(),true, false);
+		XYSeries serie2 = new XYSeries(textField_4.getText(),true, false);
+		XYSeries serie3 = new XYSeries(textField_5.getText(),true, false);
+		XYSeries serie4 = new XYSeries(textField_6.getText(),true, false);
+
+		XYSeriesCollection dataset = new XYSeriesCollection();
+
+		if (nb == 0) {
+
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			dataset.addSeries(serie1);
+		} else if (nb == 1) {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+		} else if (nb == 2) {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+
+			for (int i = 0; i < createDonneX_3().size(); i++) {
+
+				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
+			}
+
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+			dataset.addSeries(serie3);
+		} else {
+			for (int i = 0; i < createDonneX_1().size(); i++) {
+
+				serie1.add(createDonneX_1().get(i), createDonneY_1().get(i));
+
+			}
+			for (int i = 0; i < createDonneX_2().size(); i++) {
+				serie2.add(createDonneX_2().get(i), createDonneY_2().get(i));
+
+			}
+
+			for (int i = 0; i < createDonneX_3().size(); i++) {
+
+				serie3.add(createDonneX_3().get(i), createDonneY_3().get(i));
+			}
+
+			for (int i = 0; i < createDonneX_4().size(); i++) {
+
+				serie4.add(createDonneX_4().get(i), createDonneY_4().get(i));
+
+			}
+			dataset.addSeries(serie1);
+			dataset.addSeries(serie2);
+			dataset.addSeries(serie3);
+			dataset.addSeries(serie4);
+		}
+
+		return dataset;
+        
+    }
+	
+	
 
 }

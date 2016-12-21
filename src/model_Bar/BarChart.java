@@ -1,38 +1,37 @@
 package model_Bar;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.ButtonGroup;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.ui.Layer;
+import org.jfree.ui.RectangleAnchor;
 
+import com.orsoncharts.util.TextAnchor;
 import com.sun.prism.paint.Color;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JRadioButton;
-import javax.swing.JLayeredPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.UIManager;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.SoftBevelBorder;
 
 public class BarChart extends JFrame {
 
@@ -466,4 +465,34 @@ public class BarChart extends JFrame {
 
 		return chart;
 	}
+	
+	public JFreeChart createXYBarChart(String titre, String axeX, String axeY,IntervalXYDataset dataset,boolean legende) {
+		JFreeChart chart = null;
+
+		if(legende==true){
+		chart = ChartFactory.createXYBarChart(titre, axeX,false, axeY, dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		}else {
+			chart = ChartFactory.createXYBarChart(titre, axeX,false, axeY, dataset,
+					PlotOrientation.VERTICAL, false, true, false);
+		}
+		
+		XYPlot plot = (XYPlot) chart.getPlot();
+        final IntervalMarker target = new IntervalMarker(400.0, 700.0);
+        target.setLabel("Target Range");
+        target.setLabelFont(new Font("SansSerif", Font.ITALIC, 11));
+        target.setLabelAnchor(RectangleAnchor.LEFT);
+//        target.setLabelAnchor(TextAnchor.CENTER_LEFT);
+//        target.setPaint(new Color(222, 222, 255, 128));
+//        plot.addRangeMarker(target, Layer.BACKGROUND);
+
+		return chart;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
