@@ -21,8 +21,15 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+
+
+
+
+import com.sun.javafx.charts.Legend;
+
 import javax.swing.JLayeredPane;
 import javax.swing.border.BevelBorder;
 
@@ -279,7 +286,7 @@ public class PieChart extends JFrame {
 		plot.setLabelGap(0.02);
 		plot.setIgnoreZeroValues(true);
 		plot.setLabelLinksVisible(true);
-
+		//plot.setSimpleLabels(true);
 		// plot.setExplodePercent("", 5.5);
 		return chart;
 

@@ -30,6 +30,8 @@ import javax.swing.JButton;
 
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
@@ -123,6 +125,8 @@ public class Panel_Categorie extends JPanel {
 					buttonPlus.setEnabled(false);
 					textField_4.setVisible(false);
 					lblGroupes.setVisible(false);
+					rdbtnDonnesSi.setEnabled(false);
+					rdbtnSriesDeDonnes.setEnabled(false);
 					
 				}
 				if (comboBox.getSelectedItem().toString()
@@ -132,15 +136,59 @@ public class Panel_Categorie extends JPanel {
 					textField_4.setVisible(true);
 					lblGroupes.setVisible(true);
 					
+					rdbtnDonnesSi.setEnabled(true);
+					rdbtnSriesDeDonnes.setEnabled(true);
+					
 				}
 			}
 		});
 		panel.add(comboBox, "cell 4 0 2 1,growx");
 
 		rdbtnDonnesSi = new JRadioButton("Donn\u00E9es Simple");
+		rdbtnDonnesSi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textField_4.setVisible(false);
+				lblGroupes.setVisible(false);
+				buttonPlus.setEnabled(false);
+				
+				textPane_2.setVisible(false);
+				textPane_3.setVisible(false);
+				textPane_4.setVisible(false);
+				textPane_5.setVisible(false);
+				
+				lblDonnesY_1.setVisible(false);
+				textField_5.setVisible(false);
+				textPane_2.setText("");
+				textField_5.setText("");
+				
+				lblDonnesY_2.setVisible(false);
+				textField_6.setVisible(false);
+				textPane_3.setText("");
+				textField_6.setText("");
+				
+				lblDonnesY_3.setVisible(false);
+				textField_7.setVisible(false);
+				textPane_4.setText("");
+				textField_7.setText("");
+				
+				lblDonnesY_4.setVisible(false);
+				textField_8.setVisible(false);
+				textPane_5.setText("");
+				textField_8.setText("");
+				
+			}
+		});
 		panel.add(rdbtnDonnesSi, "cell 7 0");
 
 		rdbtnSriesDeDonnes = new JRadioButton("S\u00E8ries de donn\u00E9es");
+		rdbtnSriesDeDonnes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField_4.setVisible(true);
+				lblGroupes.setVisible(true);
+				buttonPlus.setEnabled(true);
+			}
+		});
 		panel.add(rdbtnSriesDeDonnes, "cell 7 1");
 
 		group = new ButtonGroup();
@@ -191,10 +239,7 @@ public class Panel_Categorie extends JPanel {
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null,
 				null));
 		add(panel_1, "cell 0 4 1 3,grow");
-		panel_1.setLayout(new MigLayout(
-				"",
-				"[108.00][][62.00,grow,right][pref!][62.00,grow,right][][62px,grow,right][][62px,grow][][62,grow][]",
-				"[25.00][][74.00,grow][40.00][][][][][]"));
+		panel_1.setLayout(new MigLayout("", "[108.00][][50.00,grow,right][pref!][50.00,grow,right][][62px,grow,right][][62px,grow][][62,grow][]", "[25.00][][74.00,grow][40.00][][][][][]"));
 
 		lblDonnesX = new JLabel("Donn\u00E9es X");
 		panel_1.add(lblDonnesX, "cell 0 1");
@@ -233,10 +278,12 @@ public class Panel_Categorie extends JPanel {
 		panel_1.add(textPane_5, "cell 10 2 1 2,grow");
 
 		lblGroupes = new JLabel("Groupes:");
+		lblGroupes.setVisible(false);
 		panel_1.add(lblGroupes, "cell 0 4,alignx right");
 
 		textField_4 = new JTextField();
 		panel_1.add(textField_4, "cell 2 4,growx");
+		textField_4.setVisible(false);
 		textField_4.setColumns(10);
 
 		textField_5 = new JTextField();
@@ -454,7 +501,14 @@ public class Panel_Categorie extends JPanel {
 					JFreeChart chart = null;
 					BarChart_1 b = new BarChart_1();
 					DefaultCategoryDataset dataset = createBarDataset(counter);
-					chart = b.createBarChart1(dataset);
+					chart = b.createBarChart1(dataset,createDonneX());
+					CategoryPlot plot = chart.getCategoryPlot();
+					
+					CategoryItemRenderer renderer = plot.getRenderer();
+					//renderer.setItemLabelGenerator(new LabelGenerator(50.0));
+					renderer.setItemLabelFont(new Font("Serif", Font.PLAIN, 20));
+					renderer.setItemLabelsVisible(true);
+					
 					ChartFrame frame = new ChartFrame(textField.getText(),
 							chart);
 					frame.setBounds(100, 100, 709, 614);
@@ -495,6 +549,7 @@ public class Panel_Categorie extends JPanel {
 
 			if (comboBox.getSelectedItem().toString()
 					.equalsIgnoreCase(typeGraphe[2])) {
+				rdbtnDonnesSi.setEnabled(false);
 				JFreeChart chart = null;
 				buttonPlus.setEnabled(true);
 

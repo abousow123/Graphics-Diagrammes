@@ -20,6 +20,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 
@@ -281,22 +282,29 @@ public class BarChart_1 extends JFrame {
 		return dataset;
 	}
 
-	public JFreeChart createBarChart1(DefaultCategoryDataset dataset) {
+	public JFreeChart createBarChart1(DefaultCategoryDataset dataset,ArrayList<String> a) {
 		JFreeChart chart = null;
 
 		chart = ChartFactory.createBarChart(textField.getText(),
 				textField_1.getText(), textField_2.getText(), dataset,
 				PlotOrientation.VERTICAL, true, true, false);
-		CategoryPlot plot = chart.getCategoryPlot();
-		plot.setRangeGridlinePaint(java.awt.Color.black);
+//		CategoryPlot plot = chart.getCategoryPlot();
+//		plot.setRangeGridlinePaint(java.awt.Color.black);
 
-		BarRenderer renderer = (BarRenderer) plot.getRenderer();
-		renderer.setSeriesPaint(0, java.awt.Color.blue);
-		renderer.setSeriesPaint(1, java.awt.Color.green);
-		renderer.setSeriesPaint(2, java.awt.Color.orange);
-		renderer.setItemMargin(0.01);
-
-		renderer.setDrawBarOutline(false);
+//		BarRenderer renderer = (BarRenderer) plot.getRenderer();
+//		renderer.setSeriesPaint(0, java.awt.Color.blue);
+//		renderer.setSeriesPaint(1, java.awt.Color.green);
+//		renderer.setSeriesPaint(2, java.awt.Color.orange);
+//		renderer.setItemMargin(0.01);
+//
+//		renderer.setDrawBarOutline(false);
+		
+//		CategoryItemRenderer renderer = plot.getRenderer();
+//		renderer.setItemLabelsVisible(null);
+//		
+//			renderer.setSeriesItemLabelsVisible(0, true);
+//			renderer.setSeriesItemLabelsVisible(1, false);
+		
 
 		return chart;
 	}
@@ -307,6 +315,10 @@ public class BarChart_1 extends JFrame {
 		chart = ChartFactory.createXYBarChart(textField.getText(),
 				textField_1.getText(),false, textField_2.getText(), dataset,
 				PlotOrientation.VERTICAL, true, true, false);
+		
+		CategoryPlot plot = chart.getCategoryPlot();
+		CategoryItemRenderer renderer = plot.getRenderer();
+		renderer.setItemLabelsVisible(true);
 		
 
 		return chart;

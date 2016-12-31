@@ -450,7 +450,7 @@ public class InterfaceCentrale extends JFrame {
 				JFreeChart chart = null;
 				BarChart_1 b = new BarChart_1();
 				DefaultCategoryDataset dataset = createBarDataset(counter);
-				chart = b.createBarChart1(dataset);
+				chart = b.createBarChart1(dataset,createDonneX());
 				ChartFrame frame = new ChartFrame(textField.getText(), chart);
 				frame.setBounds(100, 100, 709, 614);
 				frame.setVisible(true);

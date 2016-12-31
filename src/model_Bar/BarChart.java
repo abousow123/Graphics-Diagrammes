@@ -25,6 +25,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.ui.Layer;
@@ -409,6 +410,7 @@ public class BarChart extends JFrame {
 
         CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);
+		plot.setNotify(true);
 		
 		return chart;
 	}
@@ -430,6 +432,9 @@ public class BarChart extends JFrame {
 		
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setRangeGridlinePaint(java.awt.Color.black);
+		
+		CategoryItemRenderer renderer = plot.getRenderer();
+		renderer.setBaseSeriesVisible(true);
 
 		return chart;
 	}
