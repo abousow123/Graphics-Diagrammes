@@ -13,8 +13,8 @@ import javax.swing.JTextPane;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
-import model_Principale.Panel_XY.ButMoins1;
-import model_Principale.Panel_XY.ButPlus1;
+import model_Principale.Interface_Donnee_XY.ButMoins1;
+import model_Principale.Interface_Donnee_XY.ButPlus1;
 import net.miginfocom.swing.MigLayout;
 
 public class Test extends JPanel {

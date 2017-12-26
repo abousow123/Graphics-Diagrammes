@@ -3,7 +3,7 @@ package model_Principale;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javafx.scene.chart.NumberAxis;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,48 +23,20 @@ public class Fr extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 */	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Fr frame = new Fr();
-					Panel_XY x = new Panel_XY() ;
-					//Panel_Categorie x = new Panel_Categorie() ;
+					//PanImage p = new PanImage() ;
+					//Interface_Donnee_XY x = new Interface_Donnee_XY() ;
+					Interface_Categorie_Donnees x = new Interface_Categorie_Donnees() ;
 					frame.getContentPane().add(x) ;
 		
 					frame.setVisible(true);
 					
-//					  DefaultCategoryDataset ds = new DefaultCategoryDataset();
-//				        ds.addValue(100, "A", "A");
-//				        ds.addValue(200, "A", "B");
-//				        ds.addValue(400, "A", "C");
-//				        ds.addValue(500, "A", "D");
-//				        ds.addValue(2000, "A", "E");
-//
-//
-//				        JFreeChart bc = ChartFactory.createBarChart("My Bar Chart", "Things", "Counts",  ds, PlotOrientation.VERTICAL, true, false, false);
-//				        JFreeChart bcTop = ChartFactory.createBarChart("My Bar Chart", "Things", "Counts",  ds, PlotOrientation.VERTICAL, true, false, false);
-//
-//				        CombinedDomainCategoryPlot combinedPlot = new CombinedDomainCategoryPlot();
-//				        CategoryPlot topPlot = bcTop.getCategoryPlot();
-//				        //NumberAxis topAxis = (NumberAxis) topPlot.getRangeAxis();
-//				        //topAxis.setLowerBound(1500);
-//				       // topAxis.setUpperBound(2000);
-//
-//				        combinedPlot.add(topPlot, 1);
-//				        CategoryPlot mainPlot = bc.getCategoryPlot();
-//				        combinedPlot.add(mainPlot, 5);
-//
-//				       // NumberAxis mainAxis = (NumberAxis) mainPlot.getRangeAxis();;
-//				       // mainAxis.setLowerBound(0);
-//				       // mainAxis.setUpperBound(600);
-//
-//				        JFreeChart combinedChart = new JFreeChart("Test", combinedPlot);
-//
-//				        ChartFrame cf = new ChartFrame("Test", combinedChart);
-//				        cf.setSize(800, 600);
-//				        cf.setVisible(true);
+
 
 				} catch (Exception e) {
 					e.printStackTrace();

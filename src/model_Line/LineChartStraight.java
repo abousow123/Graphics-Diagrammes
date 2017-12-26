@@ -21,12 +21,16 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
+import org.jfree.ui.RectangleInsets;
 
 public class LineChartStraight extends JFrame {
 
@@ -158,12 +162,12 @@ public class LineChartStraight extends JFrame {
 		panel.setVisible(false);
 	}
 
-	public CategoryDataset createLineDataset(ArrayList<String> nom,ArrayList<Double> valeur) {
+	public CategoryDataset createLineDataset(String n,ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		for(int i=0; i<nom.size() ; i++){
 			dataset.addValue(new Double(valeur.get(i)),
-					"", nom.get(i));
+					n, nom.get(i));
 		}
 
 		return dataset;
@@ -243,4 +247,41 @@ public class LineChartStraight extends JFrame {
 		return chart ;
 	}
 
+	
+	public JFreeChart createFreechartLine(String titre,String axeX,String axeY,XYDataset dataset,boolean legende) {
+		JFreeChart chart = null ;
+		
+		if(legende==true){
+		chart = ChartFactory.createXYLineChart(titre,
+				axeX, axeY, dataset, PlotOrientation.VERTICAL, true, true, false);
+		}else {
+			chart = ChartFactory.createXYLineChart(titre,
+					axeX, axeY, dataset, PlotOrientation.VERTICAL,false, true, false);
+		}
+
+		XYPlot plot = (XYPlot) chart.getXYPlot();
+		plot.setBackgroundPaint(Color.LIGHT_GRAY);
+		plot.setAxisOffset(new RectangleInsets(1, 1, 1, 1));
+		plot.setDomainGridlinePaint(Color.white);
+		plot.setRangeGridlinePaint(Color.white);
+
+		XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) plot
+				.getRenderer();
+		renderer.setShapesVisible(true);
+		renderer.setShapesVisible(true);
+
+		// NumberAxis rangeAxis = (NumberAxis)plot.getRangeAxis();
+		// rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits()) ;
+		return chart;
+	}
+	
+	
+	
+	public JFreeChart createFreechartStep(XYDataset dataset) {
+		JFreeChart chart = ChartFactory.createXYLineChart(textField.getText(),
+				"X", "Y", dataset, PlotOrientation.VERTICAL, true, true, false);
+		
+		return chart;
+	}
+	
 }

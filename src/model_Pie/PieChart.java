@@ -28,7 +28,6 @@ import org.jfree.data.general.PieDataset;
 
 
 
-import com.sun.javafx.charts.Legend;
 
 import javax.swing.JLayeredPane;
 import javax.swing.border.BevelBorder;
@@ -222,8 +221,7 @@ public class PieChart extends JFrame {
 
 	}
 
-	public PieDataset createPieDataset(ArrayList<String> nom,
-			ArrayList<Double> valeur) {
+	public PieDataset createPieDataset(ArrayList<String> nom,ArrayList<Double> valeur) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 
 		for (int i = 0; i < nom.size(); i++) {
@@ -258,8 +256,7 @@ public class PieChart extends JFrame {
 		return b;
 	}
 
-	public JFreeChart createPieChart(String titre, PieDataset dataset,
-			boolean legende) {
+	public JFreeChart createPieChart(String titre, PieDataset dataset,boolean legende) {
 
 		JFreeChart chart = null;
 
@@ -292,8 +289,7 @@ public class PieChart extends JFrame {
 
 	}
 
-	public JFreeChart createChart3D(String titre, PieDataset dataset,
-			boolean legende) {
+	public JFreeChart createChart3D(String titre, PieDataset dataset,boolean legende) {
 
 		JFreeChart chart = null;
 		if (legende == true) {

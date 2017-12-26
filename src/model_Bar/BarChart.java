@@ -32,7 +32,7 @@ import org.jfree.ui.Layer;
 import org.jfree.ui.RectangleAnchor;
 
 import com.orsoncharts.util.TextAnchor;
-import com.sun.prism.paint.Color;
+
 
 public class BarChart extends JFrame {
 
@@ -496,7 +496,57 @@ public class BarChart extends JFrame {
 	
 	
 	
+	// bar1
 	
+	public DefaultCategoryDataset createBarGroupe(ArrayList<String> nomGroupe,ArrayList<String> nom,ArrayList<Double> valeur) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		
+
+		for (int i = 0; i < nom.size(); i++) {
+			
+			dataset.setValue(valeur.get(i), nom.get(i), nomGroupe.get(i));
+			
+		}
+
+		
+		return dataset;
+	}
+
+	public JFreeChart createBarChart1(String titre, String axeX, String axeY,DefaultCategoryDataset dataset,ArrayList<String> a) {
+		JFreeChart chart = null;
+
+		chart = ChartFactory.createBarChart(titre, axeX, axeY, dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+
+		
+
+		return chart;
+	}
+	
+	public JFreeChart createXYBarChart(IntervalXYDataset dataset) {
+		JFreeChart chart = null;
+
+		chart = ChartFactory.createXYBarChart(textField.getText(),
+				textField_1.getText(),false, textField_2.getText(), dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		
+		CategoryPlot plot = chart.getCategoryPlot();
+		CategoryItemRenderer renderer = plot.getRenderer();
+		renderer.setItemLabelsVisible(true);
+		
+
+		return chart;
+	}
+	
+
+	public JFreeChart createAriaChart1(DefaultCategoryDataset dataset) {
+
+		JFreeChart chart = ChartFactory.createAreaChart(textField.getText(),
+				textField_1.getText(), textField_2.getText(), dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		
+		return chart ;
+}
 	
 	
 	

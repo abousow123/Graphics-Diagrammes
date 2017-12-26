@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.chart.NumberAxis;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,23 +23,23 @@ public class Graphique extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	/** titre : Le titre du graphique affiché en haut */
+	/** titre : Le titre du graphique affichï¿½ en haut */
 	private String titre;
-	/** ordonnee : le nom de l'axe des ordonnées */
+	/** ordonnee : le nom de l'axe des ordonnï¿½es */
 	private String ordonnee;
 	/** abscisses : le nom de l'axe des abscisses */
 	private String abscisse;
-	/** valeurs : les valeurs à afficher, elles sont triées par séries et par catégories*/
+	/** valeurs : les valeurs ï¿½ afficher, elles sont triï¿½es par sï¿½ries et par catï¿½gories*/
 	private List<Float> valeurs;
-	/** series : la liste des séries */
+	/** series : la liste des sï¿½ries */
 	private List<String> series;
 	/** categories : la liste des categories */
 	private List<String> categories;
-	/** legende : booleen vrai si on affiche la légende */
+	/** legende : booleen vrai si on affiche la lï¿½gende */
 	private boolean legende;
 	/** couleurFond : la couleur du fond */
 	private Color couleurFond;
-	/** couleurBarres : les couleurs appliquées aux barres */
+	/** couleurBarres : les couleurs appliquï¿½es aux barres */
 	private Color[] couleursBarres = {Color.cyan.darker(), 
 			Color.red, Color.green, Color.cyan, Color.magenta, 
 			Color.yellow, Color.pink, Color.darkGray, Color.orange};

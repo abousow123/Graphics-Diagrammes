@@ -3,7 +3,6 @@ package modelAreaChart;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javafx.scene.chart.Chart;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

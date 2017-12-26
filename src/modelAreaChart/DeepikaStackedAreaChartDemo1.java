@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 
 import javax.swing.JPanel;
 
